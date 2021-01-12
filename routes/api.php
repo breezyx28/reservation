@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 const BASE = '/v1/user/';
 Route::get(BASE . 'home', 'HomeController@home');
 
-Route::group(['middleware' => 'auth.jwt',], function () {
+Route::group(['middleware' => 'auth.jwt'], function () {
 
     // Route::get('/user', 'sayHello@userController');
 });
