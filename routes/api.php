@@ -18,8 +18,7 @@ const BASE = '/v1/user/';
 Route::get(BASE . 'home', 'HomeController@home');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-
-    // Route::get('/user', 'sayHello@userController');
+    Route::get(BASE . 'hello', 'UserController@sayHello');
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
