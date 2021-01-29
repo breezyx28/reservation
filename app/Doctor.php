@@ -10,16 +10,16 @@ class Doctor extends Model
 
     public function docInfo()
     {
-        return $this->hasMany('App\DocInfo', 'docInfoID');
+        return $this->hasMany('App\DocInfo', 'docID');
     }
 
-    public function docSchedula()
+    public function docSchedule()
     {
-        return $this->hasMany('App\DocSchedule', 'docScheduleID');
+        return $this->hasMany('App\DocSchedule', 'docID');
     }
 
     public function hospitalInfo()
     {
-        return $this->hasMany('App\HospitalInfo', 'hospitalInfoID');
+        return $this->hasMany('App\HospitalInfo', 'docID');
     }
 }

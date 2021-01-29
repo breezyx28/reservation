@@ -24,6 +24,8 @@ class CreateUserDiagnosisTable extends Migration
             $table->unsignedBigInteger('labID');
             $table->unsignedBigInteger('labDiagnosisID');
 
+            $table->text('note')->nullable();
+
             $table->foreign('userID')
                 ->references('userID')
                 ->on('users')

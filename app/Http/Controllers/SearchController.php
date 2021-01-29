@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Doctor;
 use App\DoctorInfo;
 use App\HospitalInfo;
+use App\LabDiagnosis;
 use App\Hospital;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
+    public function searchDoc(Request $request)
     {
 
         $validated = (object) $request->validate([
@@ -19,22 +20,47 @@ class SearchController extends Controller
         ]);
 
         $searchString = $validated->search;
-        // 'docInfo', 'hospital'
-        // $search = HospitalInfo::with(['doctor' => function ($query) use ($searchString) {
-        //     $query->where('fullName', 'like', '%' . $searchString . '%');
-        // }])
-        //     ->get();
+
+        // $search  = Doctor::whereHas('docInfo', function ($query) use ($searchString) {
+        //     $query->where('specialization', 'like', '%' . $searchString . '%');
+        // })
+        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
+        //     ->orWhere('fullName', 'like', '%' . $searchString . '%')
+        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
+        //     ->select('id', 'fullName', 'phone', 'email')->get();
 
         $search = HospitalInfo::whereHas('doctor', function ($query) use ($searchString) {
-            $query->where('fullName', 'like', '%' . $searchString . '%');
+            $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
         })->with(['doctor' => function ($query) use ($searchString) {
-            $query->where('fullName', 'like', '%' . $searchString . '%');
-        }, 'docInfo'])->orWhereHas('docInfo', function ($query) use ($searchString) {
-            $query->where('specialization', 'like', '%' . $searchString . '%');
-        })->with('doctor')->get();
+            $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
+        }, 'docInfo', 'hospital', 'docSchedule'])
+            ->orWhereHas('docInfo', function ($query) use ($searchString) {
+                $query->where('specialization', 'like', '%' . $searchString . '%');
+            })->with('doctor')
+            ->get();
 
-        // $search = HospitalInfo::with('docInfo')
-        //     ->get();
+        return response()->json([
+            'success' => true,
+            'message' => null,
+            'error' => null,
+            'data' => $search,
+        ], 200);
+    }
+
+    public function searchLab(Request $request)
+    {
+
+        $validated = (object) $request->validate([
+            'search' => 'required|string'
+        ]);
+
+        $searchString = $validated->search;
+
+        $search = LabDiagnosis::where('name', 'like', '%' . $searchString . '%')->with(['lab' => function ($query) {
+            $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email');
+        }, 'labServices' => function ($query) {
+            $query->select('labID', 'name', 'price', 'note')->where('activity', '1');
+        }])->get();
 
         return response()->json([
             'success' => true,

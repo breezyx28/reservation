@@ -8,10 +8,10 @@ class DocSchedule extends Model
 {
     protected $table = 'doc_schedule';
 
-    // public function hospitalInfo()
-    // {
-    //     return $this->hasOne('App\HospitalInfo');
-    // }
+    public function hospitalInfo()
+    {
+        return $this->hasOne('App\HospitalInfo', 'docSchduleID');
+    }
 
     public function doctor()
     {

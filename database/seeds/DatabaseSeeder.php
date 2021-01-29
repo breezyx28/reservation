@@ -1,5 +1,6 @@
 <?php
 
+use App\LabDiagnosis;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,9 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            DocInfoSeeder::class,
-            DocScheduleSeeder::class,
-            HospitalInfoSeeder::class
+            LabServicesSeeder::class,
         ]);
     }
 }

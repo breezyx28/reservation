@@ -21,7 +21,7 @@ class HospitalInfo extends Model
 
     public function docSchedule()
     {
-        return $this->belongsTo('App\DocSchedule', 'docScheduleID');
+        return $this->belongsTo('App\DocSchedule', 'docID', 'docID');
     }
 
     public function hospital()
