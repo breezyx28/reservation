@@ -32,6 +32,7 @@ class UserDiagnosisController extends Controller
             return ResponseMessage::Success('نجاح', $reservLab);
         } catch (\Exception $e) {
 
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
             return ResponseMessage::Error('حدث خطأ ما', null);
         }
     }
