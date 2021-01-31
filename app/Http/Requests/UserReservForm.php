@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class ReservationRequest extends FormRequest
+class UserReservForm extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,16 +18,12 @@ class ReservationRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'hospitalInfoID' => 'required|exists:hospital_info,id|integer',
-            'servicesArray' => 'nullable|array',
+            'labID' => 'required|exists:lab,id|integer',
+            'labDiagnosisID' => 'required|exists:lab_diagnosis,id|integer',
+            'service' => 'nullable|array',
             'note' => 'nullable|string|max:191',
         ];
     }
@@ -41,7 +36,8 @@ class ReservationRequest extends FormRequest
     public function messages()
     {
         return [
-            'hospitalInfoID.required' => 'hospitalInfoID name is required!',
+            'lab.required' => 'lab name is required!',
+            'labDiagnosisID.required' => 'labDiagnosisID name is required!',
         ];
     }
 }

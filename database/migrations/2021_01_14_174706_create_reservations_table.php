@@ -13,12 +13,14 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
+
         Schema::defaultStringLength(191);
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('userID');
             $table->unsignedBigInteger('hospitalInofID');
+            $table->string('servicesArray')->nullable();
 
             $table->foreign('userID')
                 ->references('userID')
