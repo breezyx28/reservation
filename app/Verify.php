@@ -9,4 +9,6 @@ class Verify extends Model
     protected $connection = 'doa';
 
     protected $table = 'verify';
+
+    protected $fillable = ['usersHolderID'];
 }
