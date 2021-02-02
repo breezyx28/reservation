@@ -17,8 +17,8 @@ class CreateDocInfoTable extends Migration
         Schema::create('doc_info', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->string('specialization');
-            $table->bigInteger('interviewPrice');
+            $table->string('specialization')->nullable();
+            $table->bigInteger('interviewPrice')->default(0);
 
             $table->unsignedBigInteger('docID');
 

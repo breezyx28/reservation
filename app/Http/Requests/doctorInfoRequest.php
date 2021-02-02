@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class doctorInfoRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class doctorInfoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,26 @@ class doctorInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'specialization' => 'nullable|string',
+            'interviewPrice' => 'nullable|integer',
+            'docID' => 'required|exists:doctor,id|integer',
+        ];
+    }
+
+    /**
+     * If validator fails return the exception in json form
+     * @param Validator $validator
+     * @return array
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
+    }
+
+    public function messages()
+    {
+        return [
+            'docID.required' => 'حقل رقم الطبيب المرجعي مطلوب',
         ];
     }
 }

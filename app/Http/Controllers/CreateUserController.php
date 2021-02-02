@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\RegisterUsersHolderEvent;
-use App\Helper\ResponseMessage;
 use App\Hospital;
-use App\User;
 use App\Lab;
-use App\Helper\Signature;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HospitalRequest;
 use App\Http\Requests\LabRequest;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CreateUserController extends Controller

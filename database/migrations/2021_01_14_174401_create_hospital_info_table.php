@@ -19,7 +19,7 @@ class CreateHospitalInfoTable extends Migration
 
             $table->unsignedBigInteger('docID');
             $table->unsignedBigInteger('docInfoID');
-            $table->unsignedBigInteger('docSchedulelID');
+            $table->unsignedBigInteger('docScheduleID');
             $table->unsignedBigInteger('hospitalID');
 
             $table->foreign('docID')
@@ -32,7 +32,7 @@ class CreateHospitalInfoTable extends Migration
                 ->on('doc_info')
                 ->onDelete('cascade');
 
-            $table->foreign('docSchedulelID')
+            $table->foreign('docScheduleID')
                 ->references('id')
                 ->on('doc_schedule')
                 ->onDelete('cascade');
