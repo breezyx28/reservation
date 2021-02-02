@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class UserReservForm extends FormRequest
+class updateUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,13 +19,23 @@ class UserReservForm extends FormRequest
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
-            'labID' => 'required|exists:lab,id|integer',
-            'labDiagnosisID' => 'required|exists:lab_diagnosis,id|integer',
-            'services' => 'nullable|array',
-            'note' => 'nullable|string|max:191'
+            'name' => 'string',
+            'fullName' => 'string',
+            'gender' => [Rule::in(['ذكر', 'انثى'])],
+            'email' => 'regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
+            'state' => 'string',
+            'address' => 'string',
+            'lat' => 'between:-90,90',
+            'lng' => 'between:-180,80',
+            'activity' => 'boolean',
         ];
     }
 
@@ -36,8 +47,7 @@ class UserReservForm extends FormRequest
     public function messages()
     {
         return [
-            'labID.required' => 'lab id is required!',
-            'labDiagnosisID.required' => 'labDiagnosisID id is required!',
+            'name' => 'name.required name is required'
         ];
     }
 }

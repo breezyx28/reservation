@@ -20,7 +20,7 @@ class LabSeeder extends Seeder
             DB::table('lab')->insert([
                 'name' => $faker->company,
                 'phone' => '09' . $faker->unique()->numberBetween(10000000, 99999999),
-                'passowrd' => Hash::make('0000'),
+                'password' => Hash::make('0000'),
                 'state' => $faker->state,
                 'city' => $faker->city,
                 'address' => $faker->address,

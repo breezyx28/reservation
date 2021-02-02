@@ -16,15 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 const BASE = '/v1/user/';
 Route::get(BASE . 'home', 'HomeController@home');
+Route::post(BASE . 'createLab', 'CreateUserController@createLab');
+Route::post(BASE . 'createHospital', 'CreateUserController@createHospital');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::get(BASE . 'hello', 'UserController@sayHello');
+    Route::get(BASE . 'login', 'UserController@login');
 
     Route::get(BASE . 'search', 'SearchController@searchDoc');
     Route::get(BASE . 'searchLab', 'SearchController@searchLab');
 
     Route::post(BASE . 'reservDoc', 'ReservationsController@reservDoc');
     Route::post(BASE . 'reservLab', 'UserDiagnosisController@userDiagnosis');
+
+    Route::post(BASE . 'updateProfile', 'UserController@updateProfile');
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

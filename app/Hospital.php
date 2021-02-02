@@ -8,6 +8,11 @@ class Hospital extends Model
 {
     protected $table = 'hospital';
 
+    protected $hidden = [
+        'password',
+    ];
+
+
     public function docInfo()
     {
         return $this->hasMany('App\DocInfo');

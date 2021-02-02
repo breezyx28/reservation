@@ -18,7 +18,7 @@ class CreateHospitalTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('phone')->unique();
-            $table->string('passowrd');
+            $table->string('password');
             $table->string('state');
             $table->string('city')->nullable();
             $table->string('address')->nullable();
