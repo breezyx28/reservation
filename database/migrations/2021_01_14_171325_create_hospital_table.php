@@ -27,7 +27,8 @@ class CreateHospitalTable extends Migration
             $table->string('lng');
             $table->integer('role')->default(1);
             $table->integer('companyEarns')->default(20);
-            $table->boolean('activity');
+            $table->boolean('activity')->default(1);
+            $table->boolean('verified')->default(0);
             $table->timestamps();
         });
     }

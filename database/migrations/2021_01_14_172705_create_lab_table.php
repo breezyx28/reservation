@@ -28,6 +28,7 @@ class CreateLabTable extends Migration
             $table->integer('role')->default(2);
             $table->integer('companyEarns')->default(20);
             $table->boolean('activity')->default(1);
+            $table->boolean('verified')->default(0);
             $table->timestamps();
         });
     }
