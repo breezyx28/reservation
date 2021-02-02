@@ -231,6 +231,7 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Message' => App\Helper\ResponseMessage::class,
         'ValidateArray' => App\Helper\ValidateArray::class,
+        'Signature' => App\Helper\Signature::class
 
     ],
 

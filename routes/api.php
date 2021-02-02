@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 const BASE = '/v1/user/';
 Route::get(BASE . 'home', 'HomeController@home');
+Route::post(BASE . 'createLab', 'CreateUserController@createLab');
+Route::post(BASE . 'createHospital', 'CreateUserController@createHospital');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get(BASE . 'login', 'UserController@login');
