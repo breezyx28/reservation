@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\RegisterUsersHolderEvent;
-use App\Helper\ResponseMessage;
 use App\Hospital;
-use App\User;
 use App\Lab;
-use App\Helper\Signature;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HospitalRequest;
 use App\Http\Requests\LabRequest;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CreateUserController extends Controller
@@ -32,6 +28,7 @@ class CreateUserController extends Controller
         $lab->lat = $validate->lat;
         $lab->role = 1;
         $lab->activity = 1;
+        $lab->verified = 0;
 
         $data = event(new RegisterUsersHolderEvent($lab, 'lab'))[0]->original;
 
@@ -54,6 +51,7 @@ class CreateUserController extends Controller
         $hospital->lat = $validate->lat;
         $hospital->role = 1;
         $hospital->activity = 1;
+        $hospital->verified = 0;
 
         $data = event(new RegisterUsersHolderEvent($hospital, 'hospital'))[0]->original;
 
