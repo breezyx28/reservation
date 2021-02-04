@@ -21,19 +21,11 @@ class SearchController extends Controller
 
         $searchString = $validated->search;
 
-        // $search  = Doctor::whereHas('docInfo', function ($query) use ($searchString) {
-        //     $query->where('specialization', 'like', '%' . $searchString . '%');
-        // })
-        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
-        //     ->orWhere('fullName', 'like', '%' . $searchString . '%')
-        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
-        //     ->select('id', 'fullName', 'phone', 'email')->get();
-
         $search = HospitalInfo::whereHas('doctor', function ($query) use ($searchString) {
             $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
         })->with(['doctor' => function ($query) use ($searchString) {
             $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
-        }, 'docInfo', 'hospital', 'docSchedule'])
+        }, 'docInfo', 'hospital.hospitalServices.services', 'docSchedule'])
             ->orWhereHas('docInfo', function ($query) use ($searchString) {
                 $query->where('specialization', 'like', '%' . $searchString . '%');
             })->with('doctor')
@@ -57,7 +49,7 @@ class SearchController extends Controller
         $searchString = $validated->search;
 
         $search = LabDiagnosis::where('name', 'like', '%' . $searchString . '%')->with(['lab' => function ($query) {
-            $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email');
+            $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email', 'lat', 'lng');
         }, 'labServices' => function ($query) {
             $query->select('labID', 'name', 'price', 'note')->where('activity', '1');
         }])->get();
