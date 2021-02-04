@@ -49,7 +49,7 @@ class SearchController extends Controller
         $searchString = $validated->search;
 
         $search = LabDiagnosis::where('name', 'like', '%' . $searchString . '%')->with(['lab' => function ($query) {
-            $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email');
+            $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email', 'lat', 'lng');
         }, 'labServices' => function ($query) {
             $query->select('labID', 'name', 'price', 'note')->where('activity', '1');
         }])->get();
