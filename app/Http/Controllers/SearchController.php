@@ -21,19 +21,11 @@ class SearchController extends Controller
 
         $searchString = $validated->search;
 
-        // $search  = Doctor::whereHas('docInfo', function ($query) use ($searchString) {
-        //     $query->where('specialization', 'like', '%' . $searchString . '%');
-        // })
-        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
-        //     ->orWhere('fullName', 'like', '%' . $searchString . '%')
-        //     ->with('docInfo', 'docSchedule', 'hospitalInfo')
-        //     ->select('id', 'fullName', 'phone', 'email')->get();
-
         $search = HospitalInfo::whereHas('doctor', function ($query) use ($searchString) {
             $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
         })->with(['doctor' => function ($query) use ($searchString) {
             $query->where('fullName', 'like', '%' . $searchString . '%')->where('activity', '=', '1');
-        }, 'docInfo', 'hospital', 'docSchedule'])
+        }, 'docInfo', 'hospital.hospitalServices.services', 'docSchedule'])
             ->orWhereHas('docInfo', function ($query) use ($searchString) {
                 $query->where('specialization', 'like', '%' . $searchString . '%');
             })->with('doctor')
