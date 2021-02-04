@@ -20,7 +20,7 @@ class UserDiagnosisController extends Controller
         $reservLab->userID = auth()->user()->userID;
         $reservLab->labDiagnosisID = $validated->labDiagnosisID;
         $reservLab->labID = $validated->labID;
-        $reservLab->service = isset($validated->servicesArray) ? json_encode($validated->servicesArray) : null;
+        $reservLab->service = isset($validated->services) ? json_encode($validated->services) : null;
         $reservLab->attendToken = Str::random(20) . rand(1000, 9999999);
         $reservLab->statue = 'live';
         $reservLab->note = $request['note'];

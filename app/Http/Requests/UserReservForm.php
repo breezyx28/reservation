@@ -23,8 +23,8 @@ class UserReservForm extends FormRequest
         return [
             'labID' => 'required|exists:lab,id|integer',
             'labDiagnosisID' => 'required|exists:lab_diagnosis,id|integer',
-            'service' => 'nullable|array',
-            'note' => 'nullable|string|max:191',
+            'services' => 'nullable|array',
+            'note' => 'nullable|string|max:191'
         ];
     }
 
@@ -36,8 +36,8 @@ class UserReservForm extends FormRequest
     public function messages()
     {
         return [
-            'lab.required' => 'lab name is required!',
-            'labDiagnosisID.required' => 'labDiagnosisID name is required!',
+            'labID.required' => 'lab id is required!',
+            'labDiagnosisID.required' => 'labDiagnosisID id is required!',
         ];
     }
 }

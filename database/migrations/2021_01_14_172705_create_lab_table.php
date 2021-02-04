@@ -18,7 +18,7 @@ class CreateLabTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('phone')->unique();
-            $table->string('passowrd');
+            $table->string('password');
             $table->string('state');
             $table->string('city')->nullable();
             $table->string('address')->nullable();
@@ -28,6 +28,7 @@ class CreateLabTable extends Migration
             $table->integer('role')->default(2);
             $table->integer('companyEarns')->default(20);
             $table->boolean('activity')->default(1);
+            $table->boolean('verified')->default(0);
             $table->timestamps();
         });
     }

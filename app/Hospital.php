@@ -8,6 +8,11 @@ class Hospital extends Model
 {
     protected $table = 'hospital';
 
+    protected $hidden = [
+        'password',
+    ];
+
+
     public function docInfo()
     {
         return $this->hasMany('App\DocInfo');
@@ -15,6 +20,11 @@ class Hospital extends Model
 
     public function hospitalInfo()
     {
-        return $this->hasMany('App\HospitalInfo');
+        return $this->hasMany('App\HospitalInfo', 'hospitalID');
+    }
+
+    public function hospitalServices()
+    {
+        return $this->hasMany('App\HospitalServices', 'hospitalID');
     }
 }

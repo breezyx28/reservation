@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class doctorInfoRequest extends FormRequest
+class updateUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +27,18 @@ class doctorInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'specialization' => 'nullable|string',
-            'interviewPrice' => 'nullable|integer',
-            'docID' => 'required|exists:doctor,id|integer',
+            'name' => 'string',
+            'fullName' => 'string',
+            'gender' => [Rule::in(['ذكر', 'انثى'])],
+            'email' => 'regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
+            'state' => 'string',
+            'address' => 'string',
+            'lat' => 'between:-90,90',
+            'lng' => 'between:-180,80',
+            'activity' => 'boolean',
         ];
     }
 
-    /**
-     * If validator fails return the exception in json form
-     * @param Validator $validator
-     * @return array
-     */
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
@@ -45,7 +47,7 @@ class doctorInfoRequest extends FormRequest
     public function messages()
     {
         return [
-            'docID.required' => 'حقل رقم الطبيب المرجعي مطلوب',
+            'name' => 'name.required name is required'
         ];
     }
 }

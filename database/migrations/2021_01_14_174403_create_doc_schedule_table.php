@@ -38,7 +38,7 @@ class CreateDocScheduleTable extends Migration
             $table->boolean('thursday')->default(1);
             $table->boolean('friday')->default(1);
 
-            $table->boolean('off');
+            $table->boolean('off')->default(0);
 
             $table->timestamps();
         });
