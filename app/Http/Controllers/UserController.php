@@ -61,7 +61,7 @@ class UserController extends Controller
                 break;
             case 'lab':
                 $data = \App\UserDiagnosis::where('userID', auth()->user()->userID)->with(['lab' => function ($query) {
-                    $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email', 'lat', 'lng')->get();
+                    $query->select('id', 'name', 'phone', 'state', 'city', 'address', 'email', 'lat', 'lng')->groupBy('attendToken')->get();
                 }, 'labDiagnosis'])->groupBy('attendToken')->get();
                 return Resp::Success('الطلبات السابقة للمعامل', $data);
                 break;
