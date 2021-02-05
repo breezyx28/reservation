@@ -10,7 +10,7 @@ class ValidateArray
             return $input;
         }
 
-        parse_str($input, $output);
+        $output = json_decode($input);
 
         if (is_array($output)) {
             return $output;
