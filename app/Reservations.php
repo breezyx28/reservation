@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservations extends Model
 {
     protected $table = 'reservations';
+    protected $appends = ['servicesArray'];
 
     public function user()
     {
@@ -18,8 +19,9 @@ class Reservations extends Model
         return $this->belongsTo(hospitalInfo::class, 'hospitalInfoID');
     }
 
-    public function getSevrvicesArrayAttribute($value)
+    public function getServicesArrayAttribute()
     {
-        return Services::find($value);
+        $data = Services::find(\App\Helper\ValidateArray::parse($this->attributes['servicesArray']));
+        return $data;
     }
 }
