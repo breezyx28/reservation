@@ -29,6 +29,7 @@ class ReservationRequest extends FormRequest
         return [
             'hospitalInfoID' => 'required|exists:hospital_info,id|integer',
             'servicesArray' => 'nullable|array',
+            'atDay' => 'required|date',
             'note' => 'nullable|string|max:191',
         ];
     }
@@ -42,6 +43,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'hospitalInfoID.required' => 'hospitalInfoID name is required!',
+            'atDay.required' => 'atDay name is required!',
         ];
     }
 }

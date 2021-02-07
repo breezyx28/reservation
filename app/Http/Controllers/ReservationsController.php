@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\ResponseMessage, App\Helper\ValidateArray;
+use App\Helper\ResponseMessage;
+use App\Helper\DocAvilable;
 use App\Reservations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationRequest as ReservForm;
@@ -21,9 +22,14 @@ class ReservationsController extends Controller
         $reserv->userID = auth()->user()->userID;
         $reserv->hospitalInfoID = $validated->hospitalInfoID;
         $reserv->servicesArray = isset($validated->servicesArray) ? json_encode($validated->servicesArray) : null;
+        $reserv->atDay = $validated->atDay;
         $reserv->token = Str::random(20) . rand(1000, 9999999);
         $reserv->statue = 'live';
         $reserv->note = $request['note'];
+
+        if (DocAvilable::checkDate($validated->hospitalInfoID, $validated->atDay)) {
+            return ResponseMessage::Error('الطبيب غير متوفر في هذا التاريخ ... تأكد من جدول عمله جيدا');
+        }
 
         try {
 

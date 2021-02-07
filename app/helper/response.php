@@ -14,7 +14,7 @@ class ResponseMessage
         ], $code);
     }
 
-    public static function Error(string $error, $data, int $code = 200)
+    public static function Error(string $error, $data = null, int $code = 200)
     {
 
         return response()->json([
@@ -25,7 +25,7 @@ class ResponseMessage
         ], $code);
     }
 
-    public static function Success(string $message, $data, int $code = 200)
+    public static function Success(string $message, $data = null, int $code = 200)
     {
 
         return response()->json([

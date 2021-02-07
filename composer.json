@@ -38,6 +38,12 @@
         "psr-4": {
             "App\\": "app/"
         },
+        "files": [
+            "app/helper/checkDocSchedule.php",
+            "app/helper/array.php",
+            "app/helper/response.php",
+            "app/helper/signature.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"
