@@ -21,6 +21,7 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('userID');
             $table->unsignedBigInteger('hospitalInofID');
             $table->string('servicesArray')->nullable();
+            $table->date('atDay');
 
             $table->foreign('userID')
                 ->references('userID')
