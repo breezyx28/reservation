@@ -10,7 +10,7 @@ Route::post(BASE . 'createHospital', 'CreateUserController@createHospital');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
 
-    Route::get(BASE . 'login', 'UserController@login');
+    // Route::get(BASE . 'login', 'UserController@login');
 
     Route::get(BASE . 'search', 'SearchController@searchDoc');
     Route::get(BASE . 'searchLab', 'SearchController@searchLab');
@@ -20,5 +20,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     Route::post(BASE . 'createDoctor', 'DoctorController@createDoctor');
 
+    Route::get(BASE . 'prevReserv', 'UserController@previousReservation');
     Route::post(BASE . 'updateProfile', 'UserController@updateProfile');
 });
