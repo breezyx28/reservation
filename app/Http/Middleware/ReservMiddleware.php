@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Helper\ResponseMessage;
 use Closure;
 
-class UserMiddleware
+class ReservMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $roles = ['user'];
+        $roles = ['hospital', 'lab'];
         if (!in_array(auth()->user()->accountType, $roles)) {
-            return ResponseMessage::Error('غير مسموح', "only auth for $roles");
+            return ResponseMessage::Error('غير مسموح', $roles);
         }
         return $next($request);
     }
