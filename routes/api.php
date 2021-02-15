@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         Route::post(BASE . 'createDoctor', 'DoctorController@createDoctor');
 
+        // accept client reservation request
+        Route::put(BASE . 'hospital/reservation/accept', 'ReservationsController@acceptReservation');
+        Route::put(BASE . 'lab/reservation/accept', 'UserDiagnosisController@acceptDiagnosis');
+
         // update informations
         Route::put(BASE . 'updateProfile', 'UserController@updateProfile');
         Route::put(BASE . 'resetPassword', 'UserController@resetPassword');

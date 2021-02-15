@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LabInvoiceEvent;
 use App\Helper\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\UserDiagnosis;
@@ -35,6 +36,34 @@ class UserDiagnosisController extends Controller
             return ResponseMessage::Error('error', $e->getMessage());
 
             return ResponseMessage::Error('حدث خطأ ما', null);
+        }
+    }
+
+    public function acceptDiagnosis(Request $request)
+    {
+        $this->authorize('update', UserDiagnosis::class);
+
+        $validated = (object) $request->validate([
+            'diagnosisToken' => 'required',
+            'response' => 'required|boolean',
+            'note' => 'string'
+        ]);
+
+        $query = \App\UserDiagnosis::where('attendToken', $validated->diagnosisToken);
+        $note = isset($validated->note) ? $validated->note : null;
+
+        try {
+
+            $data = [
+                '0' => $query->update(['statue' => 'rejected', 'note' => $note]),
+                '1' => $query->update(['statue' => 'accepted']),
+            ][$validated->response];
+
+            event(new LabInvoiceEvent($validated->diagnosisToken, 'invoice'));
+
+            return ResponseMessage::Success('تم القبول بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
     }
 }
