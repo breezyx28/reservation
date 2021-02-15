@@ -8,6 +8,8 @@ class Hospital extends Model
 {
     protected $table = 'hospital';
 
+    protected $fillable = ['password'];
+
     protected $hidden = [
         'password',
     ];

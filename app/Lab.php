@@ -8,6 +8,12 @@ class Lab extends Model
 {
     protected $table = 'lab';
 
+    protected $fillable = ['password'];
+
+    protected $hidden = [
+        'password',
+    ];
+
     public function labDiagnosis()
     {
 

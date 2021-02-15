@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Illuminate\Support\Facades\Log;
+
 class ResponseMessage
 {
     public static function Msg($success = true, $message = null, $error = null, $data = null, $code = 200)
@@ -16,12 +18,13 @@ class ResponseMessage
 
     public static function Error(string $error, $data = null, int $code = 200)
     {
+        Log::info('Issue :', ['problem' => $data]);
 
         return response()->json([
             'success' => false,
             'message' => null,
             'error' => $error,
-            'data' => $data
+            'data' => null
         ], $code);
     }
 
