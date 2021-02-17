@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
+use App\Helper\ResponseMessage;
 use App\User;
 use App\UserDiagnosis;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DiagnosisAcceptPlicy
+class UserDiagnosisPolicy
 {
     use HandlesAuthorization;
 
@@ -53,8 +54,11 @@ class DiagnosisAcceptPlicy
      */
     public function update(User $user, UserDiagnosis $userDiagnosis)
     {
-        if (auth()->user()->accountType == 'lab') {
+        $lab = auth()->user();
+        if ($lab->accountType == 'lab' && $userDiagnosis->labID == $lab->userID) {
             return true;
+        } else {
+            return ResponseMessage::Error('غير مصرح');
         }
     }
 

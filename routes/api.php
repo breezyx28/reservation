@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::get(BASE . 'prevReserv', 'UserController@previousReservation');
     });
 
-    Route::group(['middleware' => 'systemUsers'], function () { // hospital , lab middleware
+    Route::group(['middleware' => 'systemUsers'], function () { // hospital and lab middleware
 
         Route::post(BASE . 'createDoctor', 'DoctorController@createDoctor');
 

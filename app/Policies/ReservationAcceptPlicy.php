@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Helper\ResponseMessage;
 use App\Reservations;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -53,8 +54,11 @@ class ReservationAcceptPlicy
      */
     public function update(User $user, Reservations $reservations)
     {
-        if (auth()->user()->accountType == 'hospital') {
+        try {
+            auth()->user()->accountType == 'hospital';
             return true;
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('غير مصرح', $e->getMessage());
         }
     }
 

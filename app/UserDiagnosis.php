@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserDiagnosis extends Model
 {
     protected $table = 'user_diagnosis';
-    protected $appends = ['service'];
+    // protected $appends = ['service'];
 
     public function user()
     {

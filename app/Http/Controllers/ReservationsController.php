@@ -45,7 +45,7 @@ class ReservationsController extends Controller
         }
     }
 
-    public function acceptReservation(Request $request)
+    public function acceptReservation(Request $request) // for hospital
     {
         $this->authorize('update', Reservations::class);
 

@@ -9,6 +9,7 @@ use App\UserDiagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\UserReservForm as UserReservForm;
+use App\User;
 
 class UserDiagnosisController extends Controller
 {
@@ -39,9 +40,13 @@ class UserDiagnosisController extends Controller
         }
     }
 
-    public function acceptDiagnosis(Request $request)
+    public function acceptDiagnosis(Request $request) // for lab
     {
-        $this->authorize('update', UserDiagnosis::class);
+        $lab = auth()->user();
+
+        if (!$lab->accountType == 'lab') {
+            return ResponseMessage::Error('غير مصرح');
+        }
 
         $validated = (object) $request->validate([
             'diagnosisToken' => 'required',
@@ -54,12 +59,12 @@ class UserDiagnosisController extends Controller
 
         try {
 
-            $data = [
+            [
                 '0' => $query->update(['statue' => 'rejected', 'note' => $note]),
                 '1' => $query->update(['statue' => 'accepted']),
             ][$validated->response];
 
-            event(new LabInvoiceEvent($validated->diagnosisToken, 'invoice'));
+            $data = event(new LabInvoiceEvent($validated->diagnosisToken))[0]->original;
 
             return ResponseMessage::Success('تم القبول بنجاح', $data);
         } catch (\Exception $e) {
