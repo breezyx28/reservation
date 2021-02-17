@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ResponseMessage;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth as JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -21,7 +22,7 @@ class LoginController extends Controller
         $token = null;
 
         if (!$token = JWTAuth::attempt($credintials)) {
-            return $this->msg->message(false, null, 'خطأ في كلمة السر او رقم الهاتف', null, 200);
+            return ResponseMessage::Error('خطأ في كلمة السر او رقم الهاتف');
         }
 
         $user = auth()->user();

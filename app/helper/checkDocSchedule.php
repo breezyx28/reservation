@@ -7,6 +7,12 @@ class DocAvilable
 
     public static function checkDate($id, $dateParam)
     {
+        $check = strtotime($dateParam) > strtotime(date(now())) ? true : false;
+
+        if (!$check) {
+            return false;
+        }
+
         $reservDate = strtotime($dateParam);
         $reservDay =  strtolower(date('l', $reservDate));
 

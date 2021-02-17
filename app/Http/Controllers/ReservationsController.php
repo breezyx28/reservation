@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\InvoicesEvent;
 use App\Helper\ResponseMessage;
 use App\Helper\DocAvilable;
 use App\Reservations;
@@ -41,6 +42,38 @@ class ReservationsController extends Controller
             // return ResponseMessage::Msg(false, null, null, $e->getMessage());
 
             return ResponseMessage::Msg(false, null, 'حدث خطأ ما', null);
+        }
+    }
+
+    public function acceptReservation(Request $request) // for hospital
+    {
+        $hospital = auth()->user();
+
+        if (!$hospital->accountType == 'hospital') {
+            return ResponseMessage::Error('غير مصرح');
+        }
+
+        $validated = (object) $request->validate([
+            'reservationsToken' => 'required',
+            'response' => 'required|boolean',
+            'note' => 'string'
+        ]);
+
+        $query = \App\Reservations::where('token', $validated->reservationsToken);
+        $note = isset($validated->note) ? $validated->note : null;
+
+        try {
+
+            [
+                '0' => $query->update(['statue' => 'rejected', 'note' => $note]),
+                '1' => $query->update(['statue' => 'accepted']),
+            ][$validated->response];
+
+            $data = event(new InvoicesEvent($validated->reservationsToken))[0]->original;
+
+            return ResponseMessage::Success('تم القبول بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
     }
 }
