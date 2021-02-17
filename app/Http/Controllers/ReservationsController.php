@@ -47,7 +47,11 @@ class ReservationsController extends Controller
 
     public function acceptReservation(Request $request) // for hospital
     {
-        $this->authorize('update', Reservations::class);
+        $hospital = auth()->user();
+
+        if (!$hospital->accountType == 'hospital') {
+            return ResponseMessage::Error('غير مصرح');
+        }
 
         $validated = (object) $request->validate([
             'reservationsToken' => 'required',
@@ -60,12 +64,12 @@ class ReservationsController extends Controller
 
         try {
 
-            $data = [
+            [
                 '0' => $query->update(['statue' => 'rejected', 'note' => $note]),
                 '1' => $query->update(['statue' => 'accepted']),
             ][$validated->response];
 
-            event(new InvoicesEvent($validated->reservationsToken));
+            $data = event(new InvoicesEvent($validated->reservationsToken))[0]->original;
 
             return ResponseMessage::Success('تم القبول بنجاح', $data);
         } catch (\Exception $e) {

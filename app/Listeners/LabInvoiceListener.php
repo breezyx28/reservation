@@ -20,7 +20,7 @@ class LabInvoiceListener
         $price = 0;
         $services = [];
         $servicesTotal = 0;
-        $labEarn = $data[0]->lab->companyEarns;
+        $labEarn = $data[0]->lab->companyEarns / 100;
 
         // lab diagnosis prices on array ($services)
         foreach ($data as $key => $value) {
@@ -35,10 +35,9 @@ class LabInvoiceListener
             }
         }
 
-
         // filter and calculate data before insert
         $userID = $data[0]['userID'];
-        $total = ($servicesTotal + $price) * $labEarn;
+        $total = (($servicesTotal + $price) * $labEarn) + ($servicesTotal + $price);
 
         // prepare to insert into invoice
         $invoice = new \App\Invoice();
