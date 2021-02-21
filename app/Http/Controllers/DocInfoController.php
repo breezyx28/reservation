@@ -2,10 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\DocInfo;
+use App\Helper\ResponseMessage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateDocInfoRequest;
 use Illuminate\Http\Request;
 
 class DocInfoController extends Controller
 {
-    //
+    public function update(UpdateDocInfoRequest $request, DocInfo $docInfoID)
+    {
+
+        $validated = (object) $request->validated();
+
+        $docInfo = \App\DocInfo::find($docInfoID);
+
+        foreach ($validated as $key => $value) {
+            $docInfo->$key = $value;
+        }
+
+        try {
+            $docInfo->save();
+            return ResponseMessage::Success('تم تحديث بيانات الدكتور');
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما أثناء تحديث بيانات الدكتور', $e->getMessage());
+        }
+    }
 }

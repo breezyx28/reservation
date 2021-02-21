@@ -13,6 +13,16 @@ use Illuminate\Support\Str;
 
 class ReservationsController extends Controller
 {
+    public function index()
+    {
+        try {
+            $data = \App\Reservations::with('user', 'hospitalInfo')->all()->chunk(100)->toArray();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function reservDoc(Request $request, ReservForm $ReservForm)
     {
 
