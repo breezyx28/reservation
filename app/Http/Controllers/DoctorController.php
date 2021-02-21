@@ -13,6 +13,17 @@ use App\http\Requests\doctorRequest as DoctorForm;
 
 class DoctorController extends Controller
 {
+    // public function view(Doctor $doctor)
+    // {
+    //     try {
+
+    //         $data = $doctor::all()->chunk(100)->toArray();
+    //         return ResponseMessage::Success('تم بنجاح', $data);
+    //     } catch (\Exception $e) {
+    //         return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+    //     }
+    // }
+
     public function createDoctor(DoctorForm $request)
     {
         $this->authorize('create', Doctor::class);
@@ -34,7 +45,12 @@ class DoctorController extends Controller
         try {
 
             $doctor->save();
+
+            $doctorInfo->specialization = $validate->specialization;
+            $doctorInfo->interviewPrice = $validate->interviewPrice;
+
             $doctorInfo->docID = $doctor->id;
+
             $doctorSchdule->docID = $doctor->id;
 
             $doctorInfo->save();

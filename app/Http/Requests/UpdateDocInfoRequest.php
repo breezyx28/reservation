@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Helper\ResponseMessage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class doctorInfoRequest extends FormRequest
+class UpdateDocInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +16,12 @@ class doctorInfoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (auth()->user()->accountType == 'hospital') {
+
+            return true;
+        }
+
+        ResponseMessage::Error('غير مصرح', ['error' => 'تحديث بيانات الدكتور مصرحة فقط للمستشفى']);
     }
 
     /**
@@ -26,9 +32,8 @@ class doctorInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'specialization' => 'nullable|string',
-            'interviewPrice' => 'nullable|integer',
-            'docID' => 'required|exists:doctor,id|integer',
+            'specialization' => 'string',
+            'interviewPrice' => 'integer',
         ];
     }
 
@@ -40,12 +45,5 @@ class doctorInfoRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
-    }
-
-    public function messages()
-    {
-        return [
-            'docID.required' => 'حقل رقم الطبيب المرجعي مطلوب',
-        ];
     }
 }

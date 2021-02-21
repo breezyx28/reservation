@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helper\ResponseMessage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -15,7 +16,12 @@ class doctorScheduleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (auth()->user()->accountType == 'hospital') {
+
+            return true;
+        }
+
+        return ResponseMessage::Error('غير مصرح', null);
     }
 
     /**
@@ -26,14 +32,13 @@ class doctorScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'docID' => 'required|exists:doctor,id|integer',
-            'saturday' => 'nullable|boolean',
-            'sunday' => 'nullable|boolean',
-            'monday' => 'nullable|boolean',
-            'tuesday' => 'nullable|boolean',
-            'wednesday' => 'nullable|boolean',
-            'thursday' => 'nullable|boolean',
-            'friday' => 'nullable|boolean',
+            'saturday' => 'boolean',
+            'sunday' => 'boolean',
+            'monday' => 'boolean',
+            'tuesday' => 'boolean',
+            'wednesday' => 'boolean',
+            'thursday' => 'boolean',
+            'friday' => 'boolean',
         ];
     }
 
@@ -45,12 +50,5 @@ class doctorScheduleRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
-    }
-
-    public function messages()
-    {
-        return [
-            'docID.required' => 'حقل رقم الطبيب المرجعي مطلوب',
-        ];
     }
 }

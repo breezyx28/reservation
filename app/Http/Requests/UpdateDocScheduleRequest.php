@@ -6,9 +6,8 @@ use App\Helper\ResponseMessage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class doctorRequest extends FormRequest
+class UpdateDocScheduleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,12 +32,14 @@ class doctorRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullName' => 'required|string',
-            'gender' => ['required', Rule::in(['ذكر', 'انثى'])],
-            'phone' => 'required|unique:doctor,phone|digits:10',
-            'email' => 'nullable|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
-            'specialization' => 'required|string',
-            'interviewPrice' => 'required|integer',
+            'saturday' => 'boolean',
+            'sunday' => 'boolean',
+            'monday' => 'boolean',
+            'tuesday' => 'boolean',
+            'wednesday' => 'boolean',
+            'thursday' => 'boolean',
+            'friday' => 'boolean',
+            'off' => 'boolean'
         ];
     }
 
@@ -50,16 +51,5 @@ class doctorRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
-    }
-
-    public function messages()
-    {
-        return [
-            'fullName.required' => 'حقل الإسم مطلوب',
-            'phone.required' => 'حقل رقم الهاتف مطلوب',
-            'gender.required' => 'حقل النوع مطلوب',
-            'specialization.required' => 'حقل التخصص مطلوب',
-            'interviewPrice.required' => 'حقل سعر المقابلة مطلوب',
-        ];
     }
 }

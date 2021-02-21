@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 const BASE = '/v1/user/';
+const ADMIN = '/v1/admin/';
 
 Route::post(BASE . 'login', 'LoginController@Login');
 Route::post(BASE . 'createLab', 'CreateUserController@createLab');
@@ -34,5 +35,45 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::put(BASE . 'updateProfile', 'UserController@updateProfile');
         Route::put(BASE . 'resetPassword', 'UserController@resetPassword');
         Route::get(BASE . 'forgetPassword', 'UserController@forgetPassword');
+
+        // hospital side
+        Route::put(BASE . 'update/docSchedule/{docScheduleID}', 'DocScheduleController@update');
+        Route::put(BASE . 'update/docInfo/{docInfoID}', 'DocInfoController@update');
+    });
+
+    Route::group(['middleware' => 'adminUser'], function () { // admin route
+
+        // Route::post(ADMIN . 'createHospital', 'AdminController@createHospital');
+        // Route::post(ADMIN . 'createLab', 'AdminController@createLab');
+
+        // all
+        // Route::get(ADMIN . 'allHospitals', 'HospitalController@view');
+        // Route::get(ADMIN . 'allDoctors', 'DoctorController@view');
+        // Route::get(ADMIN . 'allLabs', 'LabController@view');
+
+        // resources
+        Route::resource(ADMIN . 'hospitals', 'HospitalResourceController')->except(['store', 'edit']);
+        Route::resource(ADMIN . 'doctors', 'DoctorResourceController')->only(['index', 'show', 'destroy']);
+        Route::resource(ADMIN . 'labs', 'LabResourceController')->except(['store', 'edit']);
+        Route::resource(ADMIN . 'settings', 'SettingsResourceController')->except(['store', 'edit']);
+
+        // single
+        // Route::get(ADMIN . 'hospital/{hospitalID}', 'HospitalController@single');
+        // Route::get(ADMIN . 'lab/{labID}', 'LabController@single');
+        // Route::get(ADMIN . 'doctor/{doctorID}', 'DoctorController@single');
+
+        // hospital reports
+        Route::get(ADMIN . 'hospitalsInvoices', 'HospitalInvoiceController@view');
+        Route::get(ADMIN . 'hospitalsInfos', 'HospitalInfoController@view');
+        Route::get(ADMIN . 'hospitalsServices', 'HospitalServicesController@view');
+
+        // lab reports
+        Route::get(ADMIN . 'labsInvoices', 'InvoiceController@index');
+        Route::get(ADMIN . 'labsInfos', 'LabDiagnosisController@index');
+        Route::get(ADMIN . 'labsServices', 'ServicesController@index');
+
+        // reservations
+        Route::get(ADMIN . 'reservations', 'ReservationsController@index');
+        Route::get(ADMIN . 'diagnosis', 'UserDiagnosisController@index');
     });
 });

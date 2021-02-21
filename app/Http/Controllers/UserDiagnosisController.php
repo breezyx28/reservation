@@ -13,6 +13,16 @@ use App\User;
 
 class UserDiagnosisController extends Controller
 {
+    public function index()
+    {
+        try {
+            $data = \App\UserDiagnosis::with('user', 'lab', 'labDiagnosis')->all()->chunk(100)->toArray();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function userDiagnosis(Request $request, UserReservForm $UserReservForm)
     {
         $validated = (object) $UserReservForm->validated();
