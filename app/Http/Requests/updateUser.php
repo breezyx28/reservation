@@ -28,13 +28,13 @@ class updateUser extends FormRequest
     {
         return [
             'name' => 'string',
-            'fullName' => 'string',
-            'gender' => [Rule::in(['ذكر', 'انثى'])],
             'email' => 'regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
             'state' => 'string',
+            'city' => [Rule::in(['ذكر', 'انثى'])],
             'address' => 'string',
             'lat' => 'between:-90,90',
             'lng' => 'between:-180,80',
+            'companyEarns' => 'integer',
             'activity' => 'boolean',
         ];
     }
@@ -42,12 +42,5 @@ class updateUser extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
-    }
-
-    public function messages()
-    {
-        return [
-            'name' => 'name.required name is required'
-        ];
     }
 }

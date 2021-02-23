@@ -25,6 +25,11 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     Route::group(['middleware' => 'systemUsers'], function () { // hospital and lab middleware
 
+        // update informations
+        Route::put(BASE . 'updateProfile', 'UserController@updateProfile');
+        Route::put(BASE . 'resetPassword', 'UserController@resetPassword');
+        Route::get(BASE . 'forgetPassword', 'UserController@forgetPassword');
+
         Route::post(BASE . 'createDoctor', 'DoctorController@createDoctor');
         Route::post(BASE . 'createHospitalServices', 'ServicesController@create');
 
@@ -35,10 +40,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::put(BASE . 'hospital/reservation/accept', 'ReservationsController@acceptReservation');
         Route::put(BASE . 'lab/reservation/accept', 'UserDiagnosisController@acceptDiagnosis');
 
-        // update informations
-        Route::put(BASE . 'updateProfile', 'UserController@updateProfile');
-        Route::put(BASE . 'resetPassword', 'UserController@resetPassword');
-        Route::get(BASE . 'forgetPassword', 'UserController@forgetPassword');
 
         // hospital side
         Route::put(BASE . 'update/docSchedule/{docScheduleID}', 'DocScheduleController@update');
