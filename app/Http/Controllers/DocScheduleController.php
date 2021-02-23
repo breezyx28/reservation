@@ -28,4 +28,16 @@ class DocScheduleController extends Controller
             return ResponseMessage::Error('حدث خطأ في اضافة البيانات', $e->getMessage());
         }
     }
+
+    public function delete(DocSchedule $docScheduleID)
+    {
+
+        try {
+            \App\DocSchedule::find($docScheduleID)->delete();
+            return ResponseMessage::Success('تم حذف الجدول بنجاح');
+        } catch (\Exception $e) {
+
+            return ResponseMessage::Error('حدث خطأ في حذف البيانات', $e->getMessage());
+        }
+    }
 }

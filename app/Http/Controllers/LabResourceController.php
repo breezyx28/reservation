@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Lab;
+use App\Events\RegisterUsersHolderEvent;
 use App\Helper\ResponseMessage;
 use App\Http\Requests\LabRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\updateUser as UpdateForm;
 
 
@@ -33,20 +36,24 @@ class LabResourceController extends Controller
      */
     public function create(LabRequest $request)
     {
-        $validated = (object) $request->validated();
+        $validate = (object) $request->validated();
 
-        $lab = new \App\Lab();
+        $lab = new Lab();
 
-        foreach ($validated as $key => $value) {
-            $lab->$key = $value;
-        }
+        $lab->name = $validate->name;
+        $lab->phone = $validate->phone;
+        $lab->password = Hash::make($validate->password);
+        $lab->state = $validate->state;
+        $lab->city = $validate->city;
+        $lab->email = $validate->email;
+        $lab->lat = $validate->lat;
+        $lab->role = 1;
+        $lab->activity = 1;
+        $lab->verified = 0;
 
-        try {
-            $lab->save();
-            return ResponseMessage::Success('تم بنجاح');
-        } catch (\Exception $e) {
-            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
-        }
+        $data = event(new RegisterUsersHolderEvent($lab, 'lab'))[0]->original;
+
+        return $data;
     }
 
     /**

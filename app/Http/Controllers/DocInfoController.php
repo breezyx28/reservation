@@ -28,4 +28,15 @@ class DocInfoController extends Controller
             return ResponseMessage::Error('حدث خطأ ما أثناء تحديث بيانات الدكتور', $e->getMessage());
         }
     }
+
+    public function delete(DocInfo $docInfoID)
+    {
+
+        try {
+            \App\DocInfo::find($docInfoID)->delete();
+            return ResponseMessage::Success('تم حذف بيانات الدكتور');
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما أثناء حذف بيانات الدكتور', $e->getMessage());
+        }
+    }
 }
