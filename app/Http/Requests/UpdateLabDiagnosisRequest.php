@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LabServicesRequest extends FormRequest
+class UpdateLabDiagnosisRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,10 +17,8 @@ class LabServicesRequest extends FormRequest
     public function authorize()
     {
         if (auth()->user()->accountType == 'lab') {
-
             return true;
         }
-
         return ResponseMessage::Error('غير مصرح', null);
     }
 
@@ -32,10 +30,10 @@ class LabServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            'labID' => 'required|exists:lab,id|integer',
-            'name' => 'required|string',
-            'price' => 'required|integer',
-            'note' => 'required|string'
+            'name' => 'string',
+            'price' => 'integer',
+            'note' => 'string',
+            'activity' => 'boolean',
         ];
     }
 

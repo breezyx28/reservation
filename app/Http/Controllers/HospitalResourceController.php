@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Hospital;
 use App\Helper\ResponseMessage;
 use Illuminate\Http\Request;
 use App\Http\Requests\HospitalRequest;
 use App\Http\Requests\updateUser as UpdateForm;
+use App\Events\RegisterUsersHolderEvent;
+use Illuminate\Support\Facades\Hash;
 use Facade\FlareClient\Http\Response;
 
 class HospitalResourceController extends Controller
@@ -33,20 +36,24 @@ class HospitalResourceController extends Controller
      */
     public function create(HospitalRequest $request)
     {
-        $validated = (object) $request->validated();
+        $validate = (object) $request->validated();
 
-        $hospital = new \App\Hospital();
+        $hospital = new Hospital();
 
-        foreach ($validated as $key => $value) {
-            $hospital->$key = $value;
-        }
+        $hospital->name = $validate->name;
+        $hospital->phone = $validate->phone;
+        $hospital->password = Hash::make($validate->password);
+        $hospital->state = $validate->state;
+        $hospital->city = $validate->city;
+        $hospital->email = $validate->email;
+        $hospital->lat = $validate->lat;
+        $hospital->role = 1;
+        $hospital->activity = 1;
+        $hospital->verified = 0;
 
-        try {
-            $hospital->save();
-            return ResponseMessage::Success('تم بنجاح');
-        } catch (\Exception $e) {
-            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
-        }
+        $data = event(new RegisterUsersHolderEvent($hospital, 'hospital'))[0]->original;
+
+        return $data;
     }
 
     /**

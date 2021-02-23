@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Helper\ResponseMessage;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ServicesRequest extends FormRequest
 {
@@ -13,7 +16,12 @@ class ServicesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if (auth()->user()->accountType == 'hospital') {
+
+            return true;
+        }
+
+        return ResponseMessage::Error('غير مصرح', null);
     }
 
     /**
@@ -24,7 +32,14 @@ class ServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'price' => 'required|integer',
+            'note' => 'required|string'
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'errors' => $validator->errors()], 200));
     }
 }

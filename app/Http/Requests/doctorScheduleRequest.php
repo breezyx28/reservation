@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Helper\ResponseMessage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use App\Helper\ResponseMessage;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class doctorScheduleRequest extends FormRequest
