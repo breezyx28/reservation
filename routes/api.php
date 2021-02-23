@@ -61,24 +61,11 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     Route::group(['middleware' => 'adminUser'], function () { // admin route
 
-        // Route::post(ADMIN . 'createHospital', 'AdminController@createHospital');
-        // Route::post(ADMIN . 'createLab', 'AdminController@createLab');
-
-        // all
-        // Route::get(ADMIN . 'allHospitals', 'HospitalController@view');
-        // Route::get(ADMIN . 'allDoctors', 'DoctorController@view');
-        // Route::get(ADMIN . 'allLabs', 'LabController@view');
-
         // resources
         Route::resource(ADMIN . 'hospitals', 'HospitalResourceController')->except(['store', 'edit']);
         Route::resource(ADMIN . 'doctors', 'DoctorResourceController')->only(['index', 'show', 'destroy']);
         Route::resource(ADMIN . 'labs', 'LabResourceController')->except(['store', 'edit']);
         Route::resource(ADMIN . 'settings', 'SettingsResourceController')->except(['store', 'edit']);
-
-        // single
-        // Route::get(ADMIN . 'hospital/{hospitalID}', 'HospitalController@single');
-        // Route::get(ADMIN . 'lab/{labID}', 'LabController@single');
-        // Route::get(ADMIN . 'doctor/{doctorID}', 'DoctorController@single');
 
         // hospital reports
         Route::get(ADMIN . 'hospitalsInvoices', 'HospitalInvoiceController@view');
