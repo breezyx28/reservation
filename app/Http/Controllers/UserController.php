@@ -15,7 +15,18 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function profile()
+    {
+        $user = auth()->user();
 
+        try {
+            //code...
+            $data = DB::table($user->accountType)->where('id', $user->userID)->get();
+            return Resp::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return Resp::Error('حدث خطأ أثناء جلب البانات', $e->getMessage());
+        }
+    }
     public function updateProfile(UpdateForm $form)
     {
         $user = auth()->user();

@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     });
 
     Route::group(['middleware' => 'systemUsers'], function () { // hospital and lab middleware
+        // personal informations
+        Route::get(BASE . 'Profile', 'UserController@profile');
 
         // update informations
         Route::put(BASE . 'updateProfile', 'UserController@updateProfile');
