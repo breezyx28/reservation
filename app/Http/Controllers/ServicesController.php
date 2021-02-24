@@ -27,6 +27,7 @@ class ServicesController extends Controller
     public function getHospitalServices()
     {
         $user = auth()->user();
+        return $user;
 
         try {
             $data = \App\HospitalServices::where('hospitalID', $user->userID)->with('services')->get();
