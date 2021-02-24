@@ -43,7 +43,7 @@ class DocInfoController extends Controller
     public function delete(DocInfo $docInfoID)
     {
         try {
-            \App\DocInfo::find($docInfoID)->delete();
+            $docInfoID->delete();
             return ResponseMessage::Success('تم حذف بيانات الدكتور');
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما أثناء حذف بيانات الدكتور', $e->getMessage());

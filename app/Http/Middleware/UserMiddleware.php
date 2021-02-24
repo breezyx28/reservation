@@ -18,7 +18,7 @@ class UserMiddleware
     {
         $roles = ['user'];
         if (!in_array(auth()->user()->accountType, $roles)) {
-            return ResponseMessage::Error('غير مسموح', "only auth for $roles");
+            return ResponseMessage::Error('غير مسموح', $roles);
         }
         return $next($request);
     }
