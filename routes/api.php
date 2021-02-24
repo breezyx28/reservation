@@ -69,7 +69,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::delete(BASE . 'delete/hospitalServices/{serviceID}', 'ServicesController@delete');
         Route::delete(BASE . 'delete/hospitalDoctors/{docID}', 'DoctorController@delete');
 
-
         // lab side
         Route::get(BASE . 'labDiagnosis', 'LabDiagnosisController@getLabDiagnosis');
         Route::get(BASE . 'labServices', 'LabServicesController@index');
@@ -81,7 +80,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         Route::delete(BASE . 'delete/labDiagnosis/{LabDiagnosisID}', 'LabDiagnosisController@delete');
         Route::delete(BASE . 'delete/labServices/{labServiceID}', 'LabServicesController@delete');
-
 
         // resources
         Route::resource(BASE . 'hospitalData', 'HospitalDataResourcesController')->except(['store', 'edit']);

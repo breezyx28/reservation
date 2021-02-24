@@ -15,7 +15,7 @@ class DocScheduleController extends Controller
         $user = auth()->user();
 
         try {
-            $data = \App\DocSchedule::where('docID', $user->userID)->get();
+            $data = \App\DocSchedule::where('docID', $user->userID)->with('doctor')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
