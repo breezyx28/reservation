@@ -26,6 +26,20 @@ class DoctorController extends Controller
         }
     }
 
+    public function viewHospitalDoctors()
+    {
+
+        $user = auth()->user();
+        $doctor = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('docID');
+
+        try {
+            $data = \App\Doctor::find($doctor)->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function createDoctor(DoctorForm $request)
     {
         $this->authorize('create', Doctor::class);
