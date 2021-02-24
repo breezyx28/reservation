@@ -100,8 +100,8 @@ class ServicesController extends Controller
 
         DB::beginTransaction();
         try {
-            \App\Services::find($serviceID)->delete();
-            \App\HospitalServices::where(['servicesID' => $serviceID, 'hospitalID' => $user->userID])->delete();
+            \App\HospitalServices::where(['servicesID' => $serviceID->id, 'hospitalID' => $user->userID])->delete();
+            $serviceID->delete();
             DB::commit();
             return ResponseMessage::Success('تم حذف الخدمة بنجاح');
         } catch (\Exception $e) {
