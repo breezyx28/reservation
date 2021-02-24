@@ -16,7 +16,7 @@ class Reservations extends Model
 
     public function hospitalInfo()
     {
-        return $this->belongsTo(hospitalInfo::class, 'hospitalInfoID');
+        return $this->belongsTo(HospitalInfo::class, 'hospitalInfoID');
     }
 
     public function getServicesArrayAttribute()
