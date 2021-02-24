@@ -11,6 +11,8 @@ Route::post(BASE . 'login', 'LoginController@Login');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
 
+    Route::get(BASE . 'checkUser', 'UserController@checkUser');
+
     Route::group(['middleware' => 'user'], function () { // Users middleware
 
         Route::get(BASE . 'search', 'SearchController@searchDoc');
