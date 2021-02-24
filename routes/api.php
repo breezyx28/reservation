@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::get(BASE . 'docSchedule', 'DocScheduleController@index');
         Route::get(BASE . 'docInfo', 'DocInfoController@index');
         Route::get(BASE . 'hospitalServices', 'ServicesController@getHospitalServices');
-        Route::get(BASE . 'hospitalInvoice', 'HospitalInvoiceController@getHospitalInvoice');
+        Route::get(BASE . 'hospitalInvoice', 'HospitalInvoiceController@viewHospitalInvoice');
         Route::get(BASE . 'hospitalReservations', 'ReservationsController@viewHospitalReservations');
 
         Route::delete(BASE . 'delete/docSchedule/{docScheduleID}', 'DocScheduleController@delete');

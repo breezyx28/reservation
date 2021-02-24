@@ -18,7 +18,7 @@ class HospitalInvoiceController extends Controller
         }
     }
 
-    public function getHospitalInvoice()
+    public function viewHospitalInvoice()
     {
         $user = auth()->user();
         // first get hospital info
