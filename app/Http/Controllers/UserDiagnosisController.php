@@ -23,6 +23,18 @@ class UserDiagnosisController extends Controller
         }
     }
 
+    public function getLabReservations()
+    {
+        $user = auth()->user();
+
+        try {
+            $data = \App\UserDiagnosis::where('labID', $user->userID)->with('user')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function userDiagnosis(Request $request, UserReservForm $UserReservForm)
     {
         $validated = (object) $UserReservForm->validated();

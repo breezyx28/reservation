@@ -32,7 +32,7 @@ class LabServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            'labID' => 'required|exists:lab,id|integer',
+            // 'labID' => 'required|exists:lab,id|integer',
             'name' => 'required|string',
             'price' => 'required|integer',
             'note' => 'required|string'

@@ -22,9 +22,22 @@ class LabDiagnosisController extends Controller
         }
     }
 
+    public function getLabDiagnosis()
+    {
+        $user = auth()->user();
+
+        try {
+            $data = \App\LabDiagnosis::where('labID', $user->userID)->with('lab')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function createLabDiagnosis(LabDiagnosisRequest $request)
     {
 
+        $user = auth()->user();
         $validate = (object) $request->validated();
 
         $labDiagnosis = new \App\LabDiagnosis();
@@ -34,6 +47,7 @@ class LabDiagnosisController extends Controller
         }
 
         $labDiagnosis->token = Str::uuid();
+        $labDiagnosis->labID = $user->userID;
 
         try {
             $labDiagnosis->save();

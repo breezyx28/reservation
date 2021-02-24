@@ -10,19 +10,21 @@ use Illuminate\Support\Facades\DB;
 use App\Helper\ResponseMessage;
 use App\HospitalInfo;
 use App\http\Requests\doctorRequest as DoctorForm;
+use App\Http\Requests\UpdateDocInfoRequest;
 
 class DoctorController extends Controller
 {
-    // public function view(Doctor $doctor)
-    // {
-    //     try {
+    public function index()
+    {
+        $user = auth()->user();
 
-    //         $data = $doctor::all()->chunk(100)->toArray();
-    //         return ResponseMessage::Success('تم بنجاح', $data);
-    //     } catch (\Exception $e) {
-    //         return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
-    //     }
-    // }
+        try {
+            $data = \App\HospitalInfo::where('hospitalID', $user->userID)->with('doctor', 'hospital')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
 
     public function createDoctor(DoctorForm $request)
     {
