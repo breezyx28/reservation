@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
 
         Route::get(BASE . 'prevReserv', 'UserController@previousReservation');
+        Route::get(BASE . 'checkUser', 'UserController@checkUser');
     });
 
     Route::group(['middleware' => 'systemUsers'], function () { // hospital and lab middleware
