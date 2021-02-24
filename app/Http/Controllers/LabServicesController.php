@@ -12,6 +12,19 @@ use Illuminate\Support\Str;
 
 class LabServicesController extends Controller
 {
+    public function viewLabServices()
+    {
+        $user = auth()->user();
+
+        try {
+            $data = \App\LabServices::where('labID', $user->userID)->get();
+
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
+        }
+    }
+
     public function create(LabServicesRequest $request)
     {
         $user = auth()->user();
@@ -39,7 +52,7 @@ class LabServicesController extends Controller
 
         $validate = (object) $request->validated();
 
-        $labServices = \App\LabServices::find($labServicesID);
+        $labServices = $labServicesID;
 
         foreach ($validate as $key => $value) {
             $labServices->$key = $value;
@@ -57,7 +70,7 @@ class LabServicesController extends Controller
     {
 
         try {
-            \App\LabServices::find($labServicesID)->delete();
+            $labServicesID->delete();
             return ResponseMessage::Success('تم حذف الخدمة بنجاح');
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e);
