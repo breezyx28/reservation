@@ -33,8 +33,8 @@ class ServicesController extends Controller
 
             $array = [];
             foreach ($data as $key => $value) {
-                if ($data[$key] == 'services') {
-                    array_push($array, $value);
+                if ($data[$key]->services) {
+                    array_push($array, $data[$key]->services);
                 }
             }
 
