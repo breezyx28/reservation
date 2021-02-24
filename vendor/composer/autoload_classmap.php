@@ -59,6 +59,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\UserMiddleware' => $baseDir . '/app/Http/Middleware/UserMiddleware.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\DoctorRequest' => $baseDir . '/app/Http/Requests/DoctorRequest.php',
     'App\\Http\\Requests\\HospitalInvoiceRequest' => $baseDir . '/app/Http/Requests/HospitalInvoiceRequest.php',
     'App\\Http\\Requests\\HospitalRequest' => $baseDir . '/app/Http/Requests/HospitalRequest.php',
     'App\\Http\\Requests\\InvoiceRequest' => $baseDir . '/app/Http/Requests/InvoiceRequest.php',
@@ -77,7 +78,10 @@ return array(
     'App\\Http\\Requests\\UpdateLabServicesRequest' => $baseDir . '/app/Http/Requests/UpdateLabServicesRequest.php',
     'App\\Http\\Requests\\UserDiagnosisRequest' => $baseDir . '/app/Http/Requests/UserDiagnosisRequest.php',
     'App\\Http\\Requests\\UserReservForm' => $baseDir . '/app/Http/Requests/UserReservForm.php',
+<<<<<<< HEAD
     'App\\Http\\Requests\\doctorRequest' => $baseDir . '/app/Http/Requests/doctorRequest.php',
+=======
+>>>>>>> 388e8b6c08ca7eca67047baffd6c8b052f45cd68
     'App\\Http\\Requests\\doctorScheduleRequest' => $baseDir . '/app/Http/Requests/doctorScheduleRequest.php',
     'App\\Http\\Requests\\updateUser' => $baseDir . '/app/Http/Requests/updateUser.php',
     'App\\Invoice' => $baseDir . '/app/Invoice.php',

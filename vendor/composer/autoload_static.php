@@ -552,6 +552,7 @@ class ComposerStaticInit2e09276eef612bc9f778b7793d264ec5
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\UserMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/UserMiddleware.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\DoctorRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DoctorRequest.php',
         'App\\Http\\Requests\\HospitalInvoiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/HospitalInvoiceRequest.php',
         'App\\Http\\Requests\\HospitalRequest' => __DIR__ . '/../..' . '/app/Http/Requests/HospitalRequest.php',
         'App\\Http\\Requests\\InvoiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/InvoiceRequest.php',
@@ -570,7 +571,10 @@ class ComposerStaticInit2e09276eef612bc9f778b7793d264ec5
         'App\\Http\\Requests\\UpdateLabServicesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateLabServicesRequest.php',
         'App\\Http\\Requests\\UserDiagnosisRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserDiagnosisRequest.php',
         'App\\Http\\Requests\\UserReservForm' => __DIR__ . '/../..' . '/app/Http/Requests/UserReservForm.php',
+<<<<<<< HEAD
         'App\\Http\\Requests\\doctorRequest' => __DIR__ . '/../..' . '/app/Http/Requests/doctorRequest.php',
+=======
+>>>>>>> 388e8b6c08ca7eca67047baffd6c8b052f45cd68
         'App\\Http\\Requests\\doctorScheduleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/doctorScheduleRequest.php',
         'App\\Http\\Requests\\updateUser' => __DIR__ . '/../..' . '/app/Http/Requests/updateUser.php',
         'App\\Invoice' => __DIR__ . '/../..' . '/app/Invoice.php',
