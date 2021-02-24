@@ -46,7 +46,7 @@ class UserController extends Controller
                 $hospital = Hospital::find($user->userID);
 
                 foreach ($validate as $key => $value) {
-                    $hospital['$key'] = $value;
+                    $hospital->$key = $value;
                 }
 
                 try {
