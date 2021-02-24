@@ -23,7 +23,7 @@ class ReservationsController extends Controller
         }
     }
 
-    public function viewtHospitalReservations()
+    public function viewHospitalReservations()
     {
         $user = auth()->user();
         $hospInfo = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('id');
