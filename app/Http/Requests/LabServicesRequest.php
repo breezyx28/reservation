@@ -35,7 +35,7 @@ class LabServicesRequest extends FormRequest
             // 'labID' => 'required|exists:lab,id|integer',
             'name' => 'required|string',
             'price' => 'required|integer',
-            'note' => 'required|string'
+            'note' => 'nullable|string'
         ];
     }
 

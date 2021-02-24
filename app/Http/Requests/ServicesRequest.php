@@ -34,7 +34,7 @@ class ServicesRequest extends FormRequest
         return [
             'name' => 'required|string',
             'price' => 'required|integer',
-            'note' => 'string'
+            'note' => 'nullable|string'
         ];
     }
 

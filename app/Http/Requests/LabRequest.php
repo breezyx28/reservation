@@ -31,8 +31,8 @@ class LabRequest extends FormRequest
             'phone' => 'required|unique:doa.users_holder,userPhoneNumber|digits:10',
             'email' => 'nullable|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
             'state' => 'required|string',
-            'city' => 'required|string',
-            'address' => 'required|string',
+            'city' => 'nullable|string',
+            'address' => 'nullable|string',
             'lat' => 'nullable|between:-90,90',
             'lng' => 'nullable|between:-180,80',
         ];
