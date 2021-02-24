@@ -26,7 +26,7 @@ class DocInfoController extends Controller
 
         $validated = (object) $request->validated();
 
-        $docInfo = \App\DocInfo::find($docInfoID);
+        $docInfo = $docInfoID;
 
         foreach ($validated as $key => $value) {
             $docInfo->$key = $value;
