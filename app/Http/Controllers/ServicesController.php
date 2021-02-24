@@ -74,7 +74,7 @@ class ServicesController extends Controller
 
     public function update(UpdateHospitalServicesRequest $request, Services $serviceID)
     {
-        $validate = (object) $request->validated();
+        $validate = $request->validated();
 
         $services = \App\Services::find($serviceID);
 
