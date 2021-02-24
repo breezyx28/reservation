@@ -16,7 +16,7 @@ class DocScheduleController extends Controller
         $docSchedules = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('docScheduleID');
 
         try {
-            $data = \App\DocSchedule::find($docSchedules)->with('doctor')->get();
+            $data = \App\DocSchedule::whereIn('id', $docSchedules)->with('doctor')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
