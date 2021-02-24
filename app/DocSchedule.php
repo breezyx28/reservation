@@ -15,6 +15,6 @@ class DocSchedule extends Model
 
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor');
+        return $this->belongsTo('App\Doctor', 'docID');
     }
 }
