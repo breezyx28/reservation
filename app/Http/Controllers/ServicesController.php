@@ -30,7 +30,15 @@ class ServicesController extends Controller
 
         try {
             $data = \App\HospitalServices::where('hospitalID', $user->userID)->with('services')->get();
-            return ResponseMessage::Success('تم بنجاح', $data);
+
+            $array = [];
+            foreach ($data as $key => $value) {
+                if ($data[$key] == 'services') {
+                    array_push($array, $value);
+                }
+            }
+
+            return ResponseMessage::Success('تم بنجاح', $array);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
         }
