@@ -22,7 +22,7 @@ class DoctorController extends Controller
         $user = auth()->user();
 
         try {
-            $data = \App\HospitalInfo::where('hospitalID', $user->userID)->with('doctor', 'hospital')->get();
+            $data = \App\HospitalInfo::where('hospitalID', $user->userID)->with('doctor', 'hospital', 'docInfo')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

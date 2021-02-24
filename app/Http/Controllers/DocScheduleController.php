@@ -35,7 +35,7 @@ class DocScheduleController extends Controller
 
         try {
             $docSchedule->save();
-            return ResponseMessage::Success('تم اضافة الجدول بنجاح', $docSchedule);
+            return ResponseMessage::Success('تم تحديث الجدول بنجاح', $docSchedule);
         } catch (\Exception $e) {
 
             return ResponseMessage::Error('حدث خطأ في اضافة البيانات', $e->getMessage());
