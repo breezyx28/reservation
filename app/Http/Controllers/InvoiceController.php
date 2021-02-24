@@ -26,7 +26,7 @@ class InvoiceController extends Controller
 
         try {
             // get the data from invoices table
-            $data = \App\Invoice::whereIn('userAttendToken', $userDiagData)->where('users')->get();
+            $data = \App\Invoice::whereIn('userAttendToken', $userDiagData)->with('users')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
