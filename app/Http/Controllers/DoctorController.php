@@ -34,7 +34,7 @@ class DoctorController extends Controller
         $doctor = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('docID');
 
         try {
-            $data = \App\Doctor::find($doctor)->get();
+            $data = \App\Doctor::find($doctor);
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
