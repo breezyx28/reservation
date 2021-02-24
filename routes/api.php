@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         // lab side
         Route::get(BASE . 'labDiagnosis', 'LabDiagnosisController@viewLabDiagnosis');
-        Route::get(BASE . 'labServices', 'LabServicesController@index');
+        Route::get(BASE . 'labServices', 'LabServicesController@viewLabServices');
         Route::get(BASE . 'labInvoice', 'InvoiceController@viewLabInvoice');
         Route::get(BASE . 'labReservations', 'UserDiagnosisController@viewLabReservations');
 
