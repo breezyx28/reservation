@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function checkUser()
+    {
+        try {
+            $user = auth()->user();
+            return Resp::Success('تم بنجاح', $user);
+        } catch (\Exception $e) {
+            return Resp::Error('حدث خطأ أثناء جلب البانات', $e->getMessage());
+        }
+    }
     public function profile()
     {
         $user = auth()->user();
