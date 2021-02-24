@@ -76,9 +76,10 @@ class ServicesController extends Controller
     {
         $validate = $request->validated();
 
-        return ResponseMessage::Success('ok', $validate);
 
         $services = \App\Services::find($serviceID);
+
+        return ResponseMessage::Success('ok', $services);
 
         foreach ($validate as $key => $value) {
             $services->$key = $value;
