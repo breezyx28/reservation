@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Helper\ResponseMessage;
 use App\HospitalInfo;
+use Illuminate\Http\Request;
 use App\http\Requests\DocRequest;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\UpdateDocInfoRequest;
 use App\Http\Requests\UpdateHospitalDoctorRequest;
 
@@ -41,11 +43,18 @@ class DoctorController extends Controller
         }
     }
 
-    public function createDoctor(DocRequest $request)
+    public function createDoctor(Request $request)
     {
         $this->authorize('create', Doctor::class);
 
-        $validate = (object) $request->validated();
+        $validate = (object) $request->validate([
+            'fullName' => 'required|string',
+            'gender' => ['required', Rule::in(['ذكر', 'انثى'])],
+            'phone' => 'required|unique:doctor,phone|digits:10',
+            'email' => 'nullable|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
+            'specialization' => 'required|string',
+            'interviewPrice' => 'required|integer',
+        ]);
 
         $user = auth()->user()->userID;
         $doctor = new Doctor();
