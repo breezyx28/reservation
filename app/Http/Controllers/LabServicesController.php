@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Helper\ResponseMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LabServicesRequest;
-use App\Http\Requests\UpdateLabDiagnosisRequest;
+use App\Http\Requests\UpdateLabServicesRequest;
 use App\LabServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LabServicesController extends Controller
@@ -47,9 +46,8 @@ class LabServicesController extends Controller
         }
     }
 
-    public function update(UpdateLabDiagnosisRequest $request, LabServices $labServicesID)
+    public function update(UpdateLabServicesRequest $request, LabServices $labServicesID)
     {
-
         $validate = (object) $request->validated();
 
         $labServices = $labServicesID;
