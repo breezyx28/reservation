@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         // my doctors
         Route::get(BASE . 'hospital/hospitalDoctor', 'DoctorController@index');
-        Route::put(BASE . 'hospital/hospitalDoctor/{id}', 'DocInfoController@update');
+        Route::put(BASE . 'hospital/hospitalDoctor/{docInfoID}', 'DocInfoController@update');
         Route::delete(BASE . 'hospital/hospitalDoctor/{id}', 'DocInfoController@delete');
 
         // my diagnosis
