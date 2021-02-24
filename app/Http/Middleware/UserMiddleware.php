@@ -16,7 +16,7 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $roles = ['user'];
+        $roles = ['users'];
         if (!in_array(auth()->user()->accountType, $roles)) {
             return ResponseMessage::Error('غير مسموح', $roles);
         }
