@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         Route::get(BASE . 'docSchedule', 'DocScheduleController@index');
         Route::get(BASE . 'docInfo', 'DocInfoController@index');
-        Route::get(BASE . 'hospitalServices', 'ServicesController@getHospitalServices');
+        Route::get(BASE . 'hospitalServices', 'ServicesController@viewHospitalServices');
         Route::get(BASE . 'hospitalInvoice', 'HospitalInvoiceController@viewHospitalInvoice');
         Route::get(BASE . 'hospitalReservations', 'ReservationsController@viewHospitalReservations');
 

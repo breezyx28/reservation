@@ -24,7 +24,7 @@ class ServicesController extends Controller
         }
     }
 
-    public function getHospitalServices()
+    public function viewHospitalServices()
     {
         $user = auth()->user();
         return $user;
