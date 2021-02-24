@@ -22,7 +22,7 @@ class LabDiagnosisController extends Controller
         }
     }
 
-    public function getLabDiagnosis()
+    public function viewLabDiagnosis()
     {
         $user = auth()->user();
 

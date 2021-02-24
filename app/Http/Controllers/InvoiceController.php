@@ -18,7 +18,7 @@ class InvoiceController extends Controller
         }
     }
 
-    public function getLabInvoice()
+    public function viewLabInvoice()
     {
         $user = auth()->user();
         // first get hospital reservations data
@@ -26,7 +26,7 @@ class InvoiceController extends Controller
 
         try {
             // get the data from invoices table
-            $data = \App\Invoice::whereIn('reservationToken', $userDiagData)->get();
+            $data = \App\Invoice::whereIn('userAttendToken', $userDiagData)->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

@@ -23,7 +23,7 @@ class UserDiagnosisController extends Controller
         }
     }
 
-    public function getLabReservations()
+    public function viewLabReservations()
     {
         $user = auth()->user();
 

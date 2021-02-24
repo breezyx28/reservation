@@ -70,10 +70,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::delete(BASE . 'delete/hospitalDoctors/{docID}', 'DoctorController@delete');
 
         // lab side
-        Route::get(BASE . 'labDiagnosis', 'LabDiagnosisController@getLabDiagnosis');
+        Route::get(BASE . 'labDiagnosis', 'LabDiagnosisController@viewLabDiagnosis');
         Route::get(BASE . 'labServices', 'LabServicesController@index');
-        Route::get(BASE . 'labInvoice', 'InvoiceController@getLabInvoice');
-        Route::get(BASE . 'labReservations', 'UserDiagnosisController@getLabReservations');
+        Route::get(BASE . 'labInvoice', 'InvoiceController@viewLabInvoice');
+        Route::get(BASE . 'labReservations', 'UserDiagnosisController@viewLabReservations');
 
         Route::put(BASE . 'update/labDiagnosis/{LabDiagnosisID}', 'LabDiagnosisController@update');
         Route::put(BASE . 'update/labServices/{labServiceID}', 'LabServicesController@update');
