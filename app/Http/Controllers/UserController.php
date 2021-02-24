@@ -40,7 +40,6 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $validate = $form->validated();
-        return Resp::Success('ok', $validate);
 
         switch ($user->accountType) {
             case 'hospital':
