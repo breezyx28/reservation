@@ -11,6 +11,7 @@ use App\Helper\ResponseMessage;
 use App\HospitalInfo;
 use App\http\Requests\doctorRequest as DoctorForm;
 use App\Http\Requests\UpdateDocInfoRequest;
+use App\Http\Requests\UpdateHospitalDoctorRequest;
 
 class DoctorController extends Controller
 {
@@ -84,6 +85,38 @@ class DoctorController extends Controller
         } catch (\Throwable $e) {
             DB::rollBack();
             return ResponseMessage::Error('حدث خطأ ما اثناء حفظ الطبيب', $e->getMessage());
+        }
+    }
+
+    public function update(UpdateHospitalDoctorRequest $request, Doctor $docID)
+    {
+        $validate = $request->validated();
+
+        $doctor = $docID;
+
+        // return ResponseMessage::Success('ok', $serviceID);
+
+        foreach ($validate as $key => $value) {
+            $doctor->$key = $value;
+        }
+
+        try {
+
+            $doctor->save();
+
+            return ResponseMessage::Success('تم تحديث الطبيب بنجاح', $doctor);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
+    public function delete(Doctor $docID)
+    {
+        try {
+            $docID->delete();
+            return ResponseMessage::Success('تم حذف بيانات الدكتور');
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما أثناء حذف بيانات الدكتور', $e->getMessage());
         }
     }
 }
