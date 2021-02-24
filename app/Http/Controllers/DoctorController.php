@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Helper\ResponseMessage;
 use App\HospitalInfo;
-use App\http\Requests\DoctorsRequest as DoctorForm;
+use App\http\Requests\DocRequest as DoctorForm;
 use App\Http\Requests\UpdateDocInfoRequest;
 use App\Http\Requests\UpdateHospitalDoctorRequest;
 
