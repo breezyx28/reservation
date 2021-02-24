@@ -26,7 +26,7 @@ class DocScheduleController extends Controller
     public function update(UpdateDocScheduleRequest $request, DocSchedule $docScheduleID)
     {
         $validated = (object) $request->validated();
-        $docSchedule = \App\DocSchedule::find($docScheduleID);
+        $docSchedule = $docScheduleID;
 
         // save doctor schedule
         foreach ($validated as $key => $value) {
