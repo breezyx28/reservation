@@ -17,4 +17,19 @@ class InvoiceController extends Controller
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
     }
+
+    public function getLabInvoice()
+    {
+        $user = auth()->user();
+        // first get hospital reservations data
+        $userDiagData = \App\UserDiagnosis::where('labID', $user->userID)->where('statue', 'accepted')->pluck('attendToken');
+
+        try {
+            // get the data from invoices table
+            $data = \App\Invoice::whereIn('reservationToken', $userDiagData)->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
 }

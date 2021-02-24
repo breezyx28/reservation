@@ -42,24 +42,45 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::put(BASE . 'hospital/reservation/accept', 'ReservationsController@acceptReservation');
         Route::put(BASE . 'lab/reservation/accept', 'UserDiagnosisController@acceptDiagnosis');
 
+        // my doctors
+        Route::get(BASE . 'hospital/hospitalDoctor', 'DoctorController@index');
+        Route::put(BASE . 'hospital/hospitalDoctor/{id}', 'DocInfoController@update');
+        Route::delete(BASE . 'hospital/hospitalDoctor/{id}', 'DocInfoController@delete');
+
+        // my diagnosis
 
         // hospital side
         Route::put(BASE . 'update/docSchedule/{docScheduleID}', 'DocScheduleController@update');
         Route::put(BASE . 'update/docInfo/{docInfoID}', 'DocInfoController@update');
         Route::put(BASE . 'update/services/{serviceID}', 'ServicesController@update');
 
+        Route::get(BASE . 'docSchedule', 'DocScheduleController@index');
+        Route::get(BASE . 'docInfo', 'DocInfoController@index');
+        Route::get(BASE . 'hospitalServices', 'ServicesController@getHospitalServices');
+        Route::get(BASE . 'hospitalInvoice', 'HospitalInvoiceController@getHospitalInvoice');
+        Route::get(BASE . 'hospitalReservations', 'ReservationsController@getHospitalInvoice');
+
+        Route::delete(BASE . 'delete/docSchedule/{docScheduleID}', 'DocScheduleController@delete');
+        Route::delete(BASE . 'delete/docInfo/{docInfoID}', 'DocInfoController@delete');
+        Route::delete(BASE . 'delete/hospitalServices/{serviceID}', 'ServicesController@delete');
+
+
         // lab side
+        Route::get(BASE . 'labDiagnosis', 'LabDiagnosisController@getLabDiagnosis');
+        Route::get(BASE . 'labServices', 'LabServicesController@index');
+        Route::get(BASE . 'labInvoice', 'InvoiceController@getLabInvoice');
+        Route::get(BASE . 'labReservations', 'UserDiagnosisController@getLabReservations');
+
         Route::put(BASE . 'update/labDiagnosis/{LabDiagnosisID}', 'LabDiagnosisController@update');
         Route::put(BASE . 'update/labServices/{labServiceID}', 'LabServicesController@update');
 
-        // delete labs
         Route::delete(BASE . 'delete/labDiagnosis/{LabDiagnosisID}', 'LabDiagnosisController@delete');
         Route::delete(BASE . 'delete/labServices/{labServiceID}', 'LabServicesController@delete');
 
-        // delete hospitals
-        Route::delete(BASE . 'delete/docSchedule/{docScheduleID}', 'DocScheduleController@delete');
-        Route::delete(BASE . 'delete/docInfo/{docInfoID}', 'DocInfoController@delete');
-        Route::delete(BASE . 'delete/services/{serviceID}', 'ServicesController@delete');
+
+        // resources
+        Route::resource(BASE . 'hospitalData', 'HospitalDataResourcesController')->except(['store', 'edit']);
+        Route::resource(BASE . 'labData', 'LabDataResourcesController')->except(['store', 'edit']);
     });
 
     Route::group(['middleware' => 'adminUser'], function () { // admin route

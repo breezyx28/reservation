@@ -24,6 +24,18 @@ class ServicesController extends Controller
         }
     }
 
+    public function getHospitalServices()
+    {
+        $user = auth()->user();
+
+        try {
+            $data = \App\HospitalServices::where('hospitalID', $user->userID)->with('services')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
+        }
+    }
+
     public function create(ServicesRequest $request)
     {
         $validate = (object) $request->validated();
@@ -74,13 +86,16 @@ class ServicesController extends Controller
 
     public function delete(Services $serviceID)
     {
+        $user = auth()->user();
 
+        DB::beginTransaction();
         try {
-
             \App\Services::find($serviceID)->delete();
-
+            \App\HospitalServices::where(['servicesID' => $serviceID, 'hospitalID' => $user->userID])->delete();
+            DB::commit();
             return ResponseMessage::Success('تم حذف الخدمة بنجاح');
         } catch (\Exception $e) {
+            DB::rollBack();
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
     }

@@ -14,7 +14,7 @@ class LabServicesController extends Controller
 {
     public function create(LabServicesRequest $request)
     {
-
+        $user = auth()->user();
         $validate = (object) $request->validated();
 
         $labServices = new \App\LabServices();
@@ -24,6 +24,7 @@ class LabServicesController extends Controller
         }
 
         $labServices->token = Str::uuid();
+        $labServices->labID = $user->userID;
 
         try {
             $labServices->save();

@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 
 class DocInfoController extends Controller
 {
+    public function index()
+    {
+        $user = auth()->user();
+
+        try {
+            $data = \App\DocInfo::where('docID', $user->userID)->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ في جلب البيانات', $e->getMessage());
+        }
+    }
     public function update(UpdateDocInfoRequest $request, DocInfo $docInfoID)
     {
 

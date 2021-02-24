@@ -23,6 +23,18 @@ class ReservationsController extends Controller
         }
     }
 
+    public function getHospitalReservations()
+    {
+        $user = auth()->user();
+        $hospInfo = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('id');
+        try {
+            $data = \App\Reservations::whereIn('hospitalInfoID', $hospInfo)->with('user')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
     public function reservDoc(Request $request, ReservForm $ReservForm)
     {
 
