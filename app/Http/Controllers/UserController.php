@@ -40,13 +40,14 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $validate = $form->validated();
+        return Resp::Success('ok', $validate);
 
         switch ($user->accountType) {
             case 'hospital':
                 $hospital = Hospital::find($user->userID);
 
                 foreach ($validate as $key => $value) {
-                    $hospital->$key = $value;
+                    $hospital['$key'] = $value;
                 }
 
                 try {
