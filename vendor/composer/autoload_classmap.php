@@ -78,10 +78,7 @@ return array(
     'App\\Http\\Requests\\UpdateLabServicesRequest' => $baseDir . '/app/Http/Requests/UpdateLabServicesRequest.php',
     'App\\Http\\Requests\\UserDiagnosisRequest' => $baseDir . '/app/Http/Requests/UserDiagnosisRequest.php',
     'App\\Http\\Requests\\UserReservForm' => $baseDir . '/app/Http/Requests/UserReservForm.php',
-<<<<<<< HEAD
     'App\\Http\\Requests\\doctorRequest' => $baseDir . '/app/Http/Requests/doctorRequest.php',
-=======
->>>>>>> 388e8b6c08ca7eca67047baffd6c8b052f45cd68
     'App\\Http\\Requests\\doctorScheduleRequest' => $baseDir . '/app/Http/Requests/doctorScheduleRequest.php',
     'App\\Http\\Requests\\updateUser' => $baseDir . '/app/Http/Requests/updateUser.php',
     'App\\Invoice' => $baseDir . '/app/Invoice.php',
