@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Helper\ResponseMessage;
 use App\HospitalInfo;
-use App\http\Requests\DocRequest as DoctorForm;
+use App\http\Requests\DocRequest;
 use App\Http\Requests\UpdateDocInfoRequest;
 use App\Http\Requests\UpdateHospitalDoctorRequest;
 
@@ -41,7 +41,7 @@ class DoctorController extends Controller
         }
     }
 
-    public function createDoctor(DoctorForm $request)
+    public function createDoctor(DocRequest $request)
     {
         $this->authorize('create', Doctor::class);
 
