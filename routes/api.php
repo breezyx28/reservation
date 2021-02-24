@@ -55,17 +55,19 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::put(BASE . 'update/docSchedule/{docScheduleID}', 'DocScheduleController@update');
         Route::put(BASE . 'update/docInfo/{docInfoID}', 'DocInfoController@update');
         Route::put(BASE . 'update/services/{serviceID}', 'ServicesController@update');
+        Route::put(BASE . 'update/hospitalDoctors/{docID}', 'DoctorController@update');
 
         Route::get(BASE . 'docSchedule', 'DocScheduleController@index');
         Route::get(BASE . 'docInfo', 'DocInfoController@index');
         Route::get(BASE . 'hospitalServices', 'ServicesController@viewHospitalServices');
         Route::get(BASE . 'hospitalInvoice', 'HospitalInvoiceController@viewHospitalInvoice');
         Route::get(BASE . 'hospitalReservations', 'ReservationsController@viewHospitalReservations');
-        Route::get(BASE . 'hospitalReservations', 'DoctorController@viewHospitalDoctors');
+        Route::get(BASE . 'hospitalDoctors', 'DoctorController@viewHospitalDoctors');
 
         Route::delete(BASE . 'delete/docSchedule/{docScheduleID}', 'DocScheduleController@delete');
         Route::delete(BASE . 'delete/docInfo/{docInfoID}', 'DocInfoController@delete');
         Route::delete(BASE . 'delete/hospitalServices/{serviceID}', 'ServicesController@delete');
+        Route::delete(BASE . 'delete/hospitalDoctors/{docID}', 'DoctorController@delete');
 
 
         // lab side

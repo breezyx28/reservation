@@ -42,7 +42,6 @@ class DocInfoController extends Controller
 
     public function delete(DocInfo $docInfoID)
     {
-
         try {
             \App\DocInfo::find($docInfoID)->delete();
             return ResponseMessage::Success('تم حذف بيانات الدكتور');
