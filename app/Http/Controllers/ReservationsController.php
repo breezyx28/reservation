@@ -16,7 +16,7 @@ class ReservationsController extends Controller
     public function index()
     {
         try {
-            $data = \App\Reservations::with('user', 'hospitalInfo')->all()->chunk(100)->toArray();
+            $data = \App\Reservations::with('user', 'hospitalInfo')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

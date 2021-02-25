@@ -16,7 +16,7 @@ class UserDiagnosisController extends Controller
     public function index()
     {
         try {
-            $data = \App\UserDiagnosis::with('user', 'lab', 'labDiagnosis')->all()->chunk(100)->toArray();
+            $data = \App\UserDiagnosis::with('user', 'lab', 'labDiagnosis')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

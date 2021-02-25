@@ -22,7 +22,7 @@ class HospitalResourceController extends Controller
     {
         try {
 
-            $data = \App\Hospital::all()->chunk(100)->toArray();
+            $data = \App\Hospital::all();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

@@ -22,7 +22,7 @@ class LabResourceController extends Controller
     {
         try {
 
-            $data = \App\Lab::all()->chunk(100)->toArray();
+            $data = \App\Lab::all();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

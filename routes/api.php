@@ -95,9 +95,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::resource(ADMIN . 'settings', 'SettingsResourceController')->except(['store', 'edit']);
 
         // hospital reports
-        Route::get(ADMIN . 'hospitalsInvoices', 'HospitalInvoiceController@view');
-        Route::get(ADMIN . 'hospitalsInfos', 'HospitalInfoController@view');
-        Route::get(ADMIN . 'hospitalsServices', 'HospitalServicesController@view');
+        Route::get(ADMIN . 'hospitalsInvoices', 'HospitalInvoiceController@index');
+        Route::get(ADMIN . 'hospitalsInfos', 'HospitalInfoController@index');
+        Route::get(ADMIN . 'hospitalsServices', 'HospitalServicesController@index');
 
         // lab reports
         Route::get(ADMIN . 'labsInvoices', 'InvoiceController@index');
