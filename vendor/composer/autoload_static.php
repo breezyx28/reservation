@@ -553,13 +553,7 @@ class ComposerStaticInit2e09276eef612bc9f778b7793d264ec5
         'App\\Http\\Middleware\\UserMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/UserMiddleware.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\DocRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DocRequest.php',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         'App\\Http\\Requests\\DoctorRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DoctorRequest.php',
->>>>>>> 950fcf959979194cfec81e1393d269e23d9dc0b7
-=======
->>>>>>> 04bcd4faf86d215676e7a8bcc6233961d7e67258
         'App\\Http\\Requests\\DoctorsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DoctorsRequest.php',
         'App\\Http\\Requests\\HospitalInvoiceRequest' => __DIR__ . '/../..' . '/app/Http/Requests/HospitalInvoiceRequest.php',
         'App\\Http\\Requests\\HospitalRequest' => __DIR__ . '/../..' . '/app/Http/Requests/HospitalRequest.php',
