@@ -50,12 +50,15 @@ class VerificationController extends Controller
 
         if (isset($resp['balance']) && $resp['balance'] < 1) {
 
-            return $this->msg->message(false, null, 'الرجاء التواصل مع إدارة النظام', null, 500);
+            return false;
+
+            // return $this->msg->message(false, null, 'الرجاء التواصل مع إدارة النظام', null, 500);
         }
 
         if ($resp['code'] != "ok") {
+            return false;
 
-            return $this->msg->message(false, null, 'خطأ في عملية ارسال رمز التأكيد', null, 403);
+            // return $this->msg->message(false, null, 'خطأ في عملية ارسال رمز التأكيد', null, 403);
         }
 
         $set = $ver::where('usersHolderID', $userHolder->id)->firstOr(function () {
@@ -69,10 +72,12 @@ class VerificationController extends Controller
         }
 
         if (!$set->save()) {
+            return false;
 
-            return $this->msg->message(false, null, 'لا يمكن حفظ بيانات تأكيد الحساب', null, 500);
+            // return $this->msg->message(false, null, 'لا يمكن حفظ بيانات تأكيد الحساب', null, 500);
         }
 
-        return $this->msg->message(true, 'تم إرسال رمز التأكيد إلى ' . $phone, null, null, 200);
+        // return $this->msg->message(true, 'تم إرسال رمز التأكيد إلى ' . $phone, null, null, 200);
+        return true;
     }
 }
