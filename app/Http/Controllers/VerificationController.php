@@ -58,12 +58,17 @@ class VerificationController extends Controller
             return $this->msg->message(false, null, 'خطأ في عملية ارسال رمز التأكيد', null, 403);
         }
 
-        $set = $ver::updateOrCreate(
-            ['usersHolderID' => $userHolder->id],
-            ['statue' => 0, 'code' => $this->code]
-        );
+        $set = $ver::where('usersHolderID', $userHolder->id)->firstOr(function () {
+            return false;
+        });
 
         if (!$set) {
+            $ver->usersHolderID = $userHolder->id;
+            $ver->statue = 0;
+            $ver->code = $this->code;
+        }
+
+        if (!$set->save()) {
 
             return $this->msg->message(false, null, 'لا يمكن حفظ بيانات تأكيد الحساب', null, 500);
         }
