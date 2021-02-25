@@ -11,7 +11,7 @@ class HospitalServicesController extends Controller
     public function index()
     {
         try {
-            $data = \App\Services::all();
+            $data = \App\Services::with('hospital', 'services')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
