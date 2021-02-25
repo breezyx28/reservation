@@ -37,3 +37,5 @@
 [11-Feb-2021 14:26:54 UTC] PHP Fatal error:  require(): Failed opening required '/home/maqsoodc/public_html/reservation/vendor/composer/platform_check.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_real.php on line 25
 [24-Feb-2021 18:31:54 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
 [24-Feb-2021 18:33:14 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
+[24-Feb-2021 18:37:54 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
+[24-Feb-2021 18:38:28 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574

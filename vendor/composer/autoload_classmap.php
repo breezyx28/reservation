@@ -60,7 +60,6 @@ return array(
     'App\\Http\\Middleware\\UserMiddleware' => $baseDir . '/app/Http/Middleware/UserMiddleware.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\DocRequest' => $baseDir . '/app/Http/Requests/DocRequest.php',
-    'App\\Http\\Requests\\DoctorRequest' => $baseDir . '/app/Http/Requests/DoctorRequest.php',
     'App\\Http\\Requests\\DoctorsRequest' => $baseDir . '/app/Http/Requests/DoctorsRequest.php',
     'App\\Http\\Requests\\HospitalInvoiceRequest' => $baseDir . '/app/Http/Requests/HospitalInvoiceRequest.php',
     'App\\Http\\Requests\\HospitalRequest' => $baseDir . '/app/Http/Requests/HospitalRequest.php',
