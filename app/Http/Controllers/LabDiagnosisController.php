@@ -62,7 +62,7 @@ class LabDiagnosisController extends Controller
 
         $validate = (object) $request->validated();
 
-        $labDiagnosis = \App\LabDiagnosis::find($LabDiagnosisID);
+        $labDiagnosis = $LabDiagnosisID;
 
         foreach ($validate as $key => $value) {
             $labDiagnosis->$key = $value;
@@ -80,7 +80,7 @@ class LabDiagnosisController extends Controller
     {
 
         try {
-            \App\LabDiagnosis::find($LabDiagnosisID)->delete();
+            $LabDiagnosisID->delete();
             return ResponseMessage::Success('تم حذف الفحص بنجاح');
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
