@@ -54,16 +54,18 @@ class ReservationsController extends Controller
             return ResponseMessage::Error('الطبيب غير متوفر في هذا التاريخ ... تأكد من جدول عمله جيدا');
         }
 
+        $reserv->atDay = date("Y-m-d", strtotime($validated->atDay));
+
         try {
 
             $reserv->save();
 
-            return ResponseMessage::Msg(true, 'نجاح', null, $reserv);
+            return ResponseMessage::Success('نجاح', $reserv);
         } catch (\Exception $e) {
 
             // return ResponseMessage::Msg(false, null, null, $e->getMessage());
 
-            return ResponseMessage::Msg(false, null, 'حدث خطأ ما', null);
+            return ResponseMessage::Success('حدث خطأ ما', $e->getMessage());
         }
     }
 
