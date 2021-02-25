@@ -50,9 +50,9 @@ class LabServicesController extends Controller
     {
         $validate = $request->validated();
 
-        $labServices = $labServicesID;
+        return ResponseMessage::Success('تم ', $labServicesID);
 
-        unset($labServices->token);
+        $labServices = \App\LabServices::find($labServicesID->id);
 
         foreach ($validate as $key => $value) {
             $labServices->$key = $value;
