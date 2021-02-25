@@ -71,7 +71,7 @@ class VerificationController extends Controller
             $ver->code = $this->code;
         }
 
-        if (!$set->save()) {
+        if (!$ver->save()) {
             return false;
 
             // return $this->msg->message(false, null, 'لا يمكن حفظ بيانات تأكيد الحساب', null, 500);
