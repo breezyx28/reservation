@@ -46,13 +46,11 @@ class LabServicesController extends Controller
         }
     }
 
-    public function update(UpdateLabServicesRequest $request, LabServices $labServicesID)
+    public function update(UpdateLabServicesRequest $request, LabServices $labServiceID)
     {
         $validate = $request->validated();
 
-        return ResponseMessage::Success('تم ', $labServicesID);
-
-        $labServices = \App\LabServices::find($labServicesID->id);
+        $labServices = $labServiceID;
 
         foreach ($validate as $key => $value) {
             $labServices->$key = $value;
