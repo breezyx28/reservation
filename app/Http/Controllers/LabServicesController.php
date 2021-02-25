@@ -52,12 +52,14 @@ class LabServicesController extends Controller
 
         $labServices = $labServicesID;
 
-        // foreach ($validate as $key => $value) {
-        //     $labServices->$key = $value;
-        // }
+        foreach ($validate as $key => $value) {
+            $labServices->$key = $value;
+        }
+
+        $labServices->forget('token');
 
         try {
-            $labServices->update($validate);
+            $labServices->save();
             return ResponseMessage::Success('تم تحديث الخدمة بنجاح', $labServices);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e);
