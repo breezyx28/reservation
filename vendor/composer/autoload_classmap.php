@@ -60,6 +60,10 @@ return array(
     'App\\Http\\Middleware\\UserMiddleware' => $baseDir . '/app/Http/Middleware/UserMiddleware.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\DocRequest' => $baseDir . '/app/Http/Requests/DocRequest.php',
+<<<<<<< HEAD
+=======
+    'App\\Http\\Requests\\DoctorRequest' => $baseDir . '/app/Http/Requests/DoctorRequest.php',
+>>>>>>> 950fcf959979194cfec81e1393d269e23d9dc0b7
     'App\\Http\\Requests\\DoctorsRequest' => $baseDir . '/app/Http/Requests/DoctorsRequest.php',
     'App\\Http\\Requests\\HospitalInvoiceRequest' => $baseDir . '/app/Http/Requests/HospitalInvoiceRequest.php',
     'App\\Http\\Requests\\HospitalRequest' => $baseDir . '/app/Http/Requests/HospitalRequest.php',
@@ -312,6 +316,7 @@ return array(
     'Dotenv\\Store\\File\\Reader' => $vendorDir . '/vlucas/phpdotenv/src/Store/File/Reader.php',
     'Dotenv\\Store\\StoreBuilder' => $vendorDir . '/vlucas/phpdotenv/src/Store/StoreBuilder.php',
     'Dotenv\\Store\\StoreInterface' => $vendorDir . '/vlucas/phpdotenv/src/Store/StoreInterface.php',
+    'Dotenv\\Store\\StringStore' => $vendorDir . '/vlucas/phpdotenv/src/Store/StringStore.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
     'Egulias\\EmailValidator\\EmailLexer' => $vendorDir . '/egulias/email-validator/src/EmailLexer.php',
     'Egulias\\EmailValidator\\EmailParser' => $vendorDir . '/egulias/email-validator/src/EmailParser.php',
@@ -4439,6 +4444,7 @@ return array(
     'Symfony\\Component\\Translation\\MessageCatalogue' => $vendorDir . '/symfony/translation/MessageCatalogue.php',
     'Symfony\\Component\\Translation\\MessageCatalogueInterface' => $vendorDir . '/symfony/translation/MessageCatalogueInterface.php',
     'Symfony\\Component\\Translation\\MetadataAwareInterface' => $vendorDir . '/symfony/translation/MetadataAwareInterface.php',
+    'Symfony\\Component\\Translation\\PluralizationRules' => $vendorDir . '/symfony/translation/PluralizationRules.php',
     'Symfony\\Component\\Translation\\PseudoLocalizationTranslator' => $vendorDir . '/symfony/translation/PseudoLocalizationTranslator.php',
     'Symfony\\Component\\Translation\\Reader\\TranslationReader' => $vendorDir . '/symfony/translation/Reader/TranslationReader.php',
     'Symfony\\Component\\Translation\\Reader\\TranslationReaderInterface' => $vendorDir . '/symfony/translation/Reader/TranslationReaderInterface.php',

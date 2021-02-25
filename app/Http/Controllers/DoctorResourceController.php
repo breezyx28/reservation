@@ -15,7 +15,7 @@ class DoctorResourceController extends Controller
     public function index()
     {
         try {
-            $data = \App\Doctor::all()->chunk(100)->toArray();
+            $data = \App\Doctor::all();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

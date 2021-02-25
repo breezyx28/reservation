@@ -39,3 +39,4 @@
 [24-Feb-2021 18:33:14 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
 [24-Feb-2021 18:37:54 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
 [24-Feb-2021 18:38:28 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 574
+[25-Feb-2021 09:04:49 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting ')' in /home/maqsoodc/public_html/reservation/vendor/composer/autoload_static.php on line 556
