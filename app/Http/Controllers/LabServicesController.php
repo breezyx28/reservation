@@ -52,11 +52,11 @@ class LabServicesController extends Controller
 
         $labServices = $labServicesID;
 
+        unset($labServices->token);
+
         foreach ($validate as $key => $value) {
             $labServices->$key = $value;
         }
-
-        $labServices->forget('token');
 
         try {
             $labServices->save();
