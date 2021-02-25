@@ -48,17 +48,16 @@ class LabServicesController extends Controller
 
     public function update(UpdateLabServicesRequest $request, LabServices $labServicesID)
     {
-        $validate = (object) $request->validated();
+        $validate = $request->validated();
 
+        $labServices = $labServicesID;
 
-        $labServices = \App\LabServices::find($labServicesID->id);
-
-        foreach ($validate as $key => $value) {
-            $labServices->$key = $value;
-        }
+        // foreach ($validate as $key => $value) {
+        //     $labServices->$key = $value;
+        // }
 
         try {
-            $labServices->save();
+            $labServices->update($validate);
             return ResponseMessage::Success('تم تحديث الخدمة بنجاح', $labServices);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e);
