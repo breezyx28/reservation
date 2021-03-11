@@ -30,7 +30,7 @@ class updateUser extends FormRequest
             'name' => 'string',
             'email' => 'regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/',
             'state' => 'string',
-            'city' => [Rule::in(['ذكر', 'انثى'])],
+            'city' => 'string',
             'address' => 'string',
             'lat' => 'between:-90,90',
             'lng' => 'between:-180,80',

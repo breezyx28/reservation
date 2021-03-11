@@ -101,11 +101,9 @@ class HospitalResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateForm $form, $id)
+    public function update(UpdateForm $form, $hospital)
     {
         $validate = $form->validated();
-
-        $hospital = \App\Hospital::find($id);
 
         foreach ($validate as $key => $value) {
             $hospital->$key = $value;
