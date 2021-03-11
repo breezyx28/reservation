@@ -90,7 +90,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         // resources
         Route::resource(ADMIN . 'hospitals', 'HospitalResourceController')->except(['store', 'edit']);
-        Route::resource(ADMIN . 'doctors', 'DoctorResourceController')->only(['index', 'show', 'destroy']);
+        Route::resource(ADMIN . 'doctors', 'DoctorResourceController')->only(['index', 'show', 'destroy', 'update']);
         Route::resource(ADMIN . 'labs', 'LabResourceController')->except(['store', 'edit']);
         Route::resource(ADMIN . 'settings', 'SettingsResourceController')->except(['store', 'edit']);
 
