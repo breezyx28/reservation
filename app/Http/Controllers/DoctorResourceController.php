@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\ResponseMessage;
+use App\Http\Requests\UpdateDoctorRequest;
 use Illuminate\Http\Request;
 
 class DoctorResourceController extends Controller
@@ -77,9 +78,22 @@ class DoctorResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDoctorRequest $form, $id)
     {
-        //
+        $validate = $form->validated();
+
+        $doc = \App\Doctor::find($id);
+
+        foreach ($validate as $key => $value) {
+            $doc->$key = $value;
+        }
+
+        try {
+            $doc->save();
+            return ResponseMessage::Success('تم تحديث البيانات بنجاح', $doc);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e);
+        }
     }
 
     /**
