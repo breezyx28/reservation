@@ -80,7 +80,7 @@ class ReservationsController extends Controller
         $validated = (object) $request->validate([
             'reservationsToken' => 'required|string',
             'response' => 'required|boolean',
-            'note' => 'required_unless:response,0|string'
+            'note' => 'nullable|string'
         ]);
 
         $query = \App\Reservations::where('token', $validated->reservationsToken);
