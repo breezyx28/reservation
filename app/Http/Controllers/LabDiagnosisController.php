@@ -44,7 +44,7 @@ class LabDiagnosisController extends Controller
         $user = auth()->user();
 
         try {
-            $data = \App\LabDiagnosis::where('labID', $user->userID)->where('statue', $validate->statue)->with('lab')->get();
+            $data = \App\UserDiagnosis::where('labID', $user->userID)->where('statue', $validate->statue)->with('lab')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
