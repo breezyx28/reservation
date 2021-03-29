@@ -84,6 +84,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         // resources
         Route::resource(BASE . 'hospitalData', 'HospitalDataResourcesController')->except(['store', 'edit']);
         Route::resource(BASE . 'labData', 'LabDataResourcesController')->except(['store', 'edit']);
+
+        // recent and previous reservations
+        Route::get(BASE . 'recentAndPrevious', 'ReservationsController@previousAndRecentHospital');
     });
 
     Route::group(['middleware' => 'adminUser'], function () { // admin route

@@ -74,6 +74,7 @@ return array(
     'App\\Http\\Requests\\SettingRequest' => $baseDir . '/app/Http/Requests/SettingRequest.php',
     'App\\Http\\Requests\\UpdateDocInfoRequest' => $baseDir . '/app/Http/Requests/UpdateDocInfoRequest.php',
     'App\\Http\\Requests\\UpdateDocScheduleRequest' => $baseDir . '/app/Http/Requests/UpdateDocScheduleRequest.php',
+    'App\\Http\\Requests\\UpdateDoctorRequest' => $baseDir . '/app/Http/Requests/UpdateDoctorRequest.php',
     'App\\Http\\Requests\\UpdateHospitalDoctorRequest' => $baseDir . '/app/Http/Requests/UpdateHospitalDoctorRequest.php',
     'App\\Http\\Requests\\UpdateHospitalServicesRequest' => $baseDir . '/app/Http/Requests/UpdateHospitalServicesRequest.php',
     'App\\Http\\Requests\\UpdateLabDiagnosisRequest' => $baseDir . '/app/Http/Requests/UpdateLabDiagnosisRequest.php',

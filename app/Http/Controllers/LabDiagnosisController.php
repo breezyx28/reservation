@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateLabDiagnosisRequest;
 use App\LabDiagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class LabDiagnosisController extends Controller
 {
@@ -28,6 +29,22 @@ class LabDiagnosisController extends Controller
 
         try {
             $data = \App\LabDiagnosis::where('labID', $user->userID)->with('lab')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
+    public function previousAndRecentLab(Request $request)
+    {
+        $validate = (object) $request->validate([
+            'statue' => ['required', Rule::in(['accepted', 'live'])]
+        ]);
+
+        $user = auth()->user();
+
+        try {
+            $data = \App\LabDiagnosis::where('labID', $user->userID)->where('statue', $validate->statue)->with('lab')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());

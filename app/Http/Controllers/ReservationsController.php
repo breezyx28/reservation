@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationRequest as ReservForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ReservationsController extends Controller
 {
@@ -26,7 +27,9 @@ class ReservationsController extends Controller
     public function viewHospitalReservations()
     {
         $user = auth()->user();
+
         $hospInfo = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('id');
+
         try {
             $data = \App\Reservations::whereIn('hospitalInfoID', $hospInfo)->with('user')->get();
             return ResponseMessage::Success('تم بنجاح', $data);
@@ -96,6 +99,24 @@ class ReservationsController extends Controller
             $data = event(new InvoicesEvent($validated->reservationsToken))[0]->original;
 
             return ResponseMessage::Success('تم القبول بنجاح', $data);
+        } catch (\Exception $e) {
+            return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
+        }
+    }
+
+    public function previousAndRecentHospital(Request $request)
+    {
+        $validate = (object) $request->validate([
+            'statue' => ['required', Rule::in(['accepted', 'live'])]
+        ]);
+
+        $user = auth()->user();
+
+        $hospInfo = \App\HospitalInfo::where('hospitalID', $user->userID)->pluck('id');
+
+        try {
+            $data = \App\Reservations::whereIn('hospitalInfoID', $hospInfo)->where('statue', $validate->statue)->with('user')->get();
+            return ResponseMessage::Success('تم بنجاح', $data);
         } catch (\Exception $e) {
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
