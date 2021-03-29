@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\UserReservForm as UserReservForm;
 use App\User;
+use Illuminate\Validation\Rule;
 
 class UserDiagnosisController extends Controller
 {
@@ -34,7 +35,6 @@ class UserDiagnosisController extends Controller
             return ResponseMessage::Error('حدث خطأ ما', $e->getMessage());
         }
     }
-
     public function userDiagnosis(Request $request, UserReservForm $UserReservForm)
     {
         $validated = (object) $UserReservForm->validated();

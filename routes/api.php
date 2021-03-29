@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         // recent and previous reservations
         Route::get(BASE . 'recentAndPreviousHospital', 'ReservationsController@previousAndRecentHospital');
-        Route::get(BASE . 'recentAndPreviousLab', 'ReservationsController@previousAndRecentHospital');
+        Route::get(BASE . 'recentAndPreviousLab', 'LabDiagnosisController@previousAndRecentLab');
     });
 
     Route::group(['middleware' => 'adminUser'], function () { // admin route
