@@ -29,9 +29,9 @@ class LoginController extends Controller
         $userAccount = auth()->user()->accountType;
 
         $data = $userAccount == 'users' ?
-            DB::table($userAccount)->where('userID', $user->userID)->toArray()
+            DB::table($userAccount)->where('userID', $user->userID)->get()
             :
-            DB::table($userAccount)->where('id', $user->userID)->toArray();
+            DB::table($userAccount)->where('id', $user->userID)->get();
 
 
         return response()->json([
