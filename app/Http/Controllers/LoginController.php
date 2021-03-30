@@ -28,6 +28,13 @@ class LoginController extends Controller
         $user = auth()->user();
         $userAccount = auth()->user()->accountType;
 
+        return response()->json([
+            'success' => true,
+            'message' => 'تم بنجاح',
+            'data' => $user,
+            // 'token' => $token,
+        ], 200);
+
         $data = $userAccount == 'users' ?
             DB::table($userAccount)->where('userID', $user->userID)->get()
             :
