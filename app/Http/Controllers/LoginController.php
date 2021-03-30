@@ -28,18 +28,40 @@ class LoginController extends Controller
         $user = auth()->user();
         $userAccount = auth()->user()->accountType;
 
-        // $usersHolder = new \App\UsersHolder();
+        if($userAccount != 'users'){
 
-        $connection = DB::connection('doa');
+            return response()->json([
+                'success' => false,
+                'message' => null,
+                'error' => 'غير مسموح',
+                'data' => null
+            ], 200);
+        }
+        
+        try {
 
-        $data = $userAccount == 'users' ?? $connection->table($userAccount)->where('id', $user->userID)->get();
+            $connection = DB::connection('doa');
+            $data = $connection->table('users')->where('userID', $user->userID)->get();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'تم بنجاح',
-            'data' => $data[0],
-            'token' => $token,
-        ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'تم بنجاح',
+                'data' => $data[0],
+                'token' => $token,
+            ], 200);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'success' => false,
+                'message' => null,
+                'error' => 'حدث خطأ ما',
+                'data' => $th->getMessage(),
+            ], 200);
+
+        }
+
+
     }
 
     // logout process
