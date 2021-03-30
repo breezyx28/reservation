@@ -14,7 +14,6 @@ class SearchController extends Controller
 {
     public function searchDoc(Request $request)
     {
-
         $validated = (object) $request->validate([
             'search' => 'required|string'
         ]);
