@@ -66,7 +66,7 @@ return [
         'doa' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST2', '95.216.109.43'),
+            'host' => env('DB_HOST2', 'maqsood.com.sd'),
             'port' => env('DB_PORT2', '3306'),
             'database' => env('DB_DATABASE2', 'forge'),
             'username' => env('DB_USERNAME2', 'forge'),
