@@ -28,6 +28,7 @@ class LoginController extends Controller
         $user = auth()->user();
         $userAccount = auth()->user()->accountType;
 
+<<<<<<< HEAD
         if($userAccount != 'users'){
 
             return response()->json([
@@ -62,6 +63,39 @@ class LoginController extends Controller
         }
 
 
+=======
+
+        if ($userAccount != 'users') {
+
+            return response()->json([
+                'success' => false,
+                'message' => null,
+                'error' => 'غير مسموح',
+                'data' => null,
+            ], 200);
+        }
+
+        try {
+
+            $connection = DB::connection('doa');
+            $data = $connection->table('users')->where('userID', $user->userID)->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'تم بنجاح',
+                'data' => $data[0],
+                'token' => $token,
+            ], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'success' => false,
+                'message' => null,
+                'error' => 'حدث خطأ ما',
+                'data' => $th->getMessage(),
+            ], 200);
+        }
+>>>>>>> b954a4a45bf94b979aa9cc03e1068a59d6fe7627
     }
 
     // logout process
