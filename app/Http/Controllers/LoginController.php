@@ -37,7 +37,7 @@ class LoginController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'تم بنجاح',
-            'data' => $data[0],
+            'data' => $data,
             'token' => $token,
         ], 200);
     }
