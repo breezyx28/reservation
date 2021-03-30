@@ -27,9 +27,12 @@ class LoginController extends Controller
 
         $user = auth()->user();
         $userAccount = auth()->user()->accountType;
-        $usersHolder = new \App\UsersHolder();
 
-        $data = $userAccount == 'users' ?? $usersHolder->where('id', $user->userID)->get();
+        // $usersHolder = new \App\UsersHolder();
+
+        $connection = DB::connection('doa');
+
+        $data = $userAccount == 'users' ?? $connection->table($userAccount)->where('id', $user->userID)->get();
 
         return response()->json([
             'success' => true,
